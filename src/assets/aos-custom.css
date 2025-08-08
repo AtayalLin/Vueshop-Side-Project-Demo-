@@ -1,0 +1,20 @@
+@keyframes fadeZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+[data-aos="fade-zoom-in"] {
+  opacity: 0;
+  transform: scale(0.9) translateY(30px);
+  transition-property: opacity, transform;
+}
+
+[data-aos="fade-zoom-in"].aos-animate {
+  animation: fadeZoomIn 1000ms ease-in-out forwards;
+}
