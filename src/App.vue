@@ -1,6 +1,10 @@
 <template>
-  <Navbar />
-  <router-view />
+  <div class="app-container">
+    <Navbar />
+    <main class="main-content">
+      <router-view />
+    </main>
+  </div>
 </template>
 
 <script setup>
@@ -15,11 +19,28 @@ onMounted(() => {
 });
 </script>
 
-<style>
+<style scoped>
+/* CSS variables moved to src/style.css (global) */
+
+.app-container {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: auto;
+  width: 100%;
+}
+
 body {
-  font-family: "Noto Sans TC", sans-serif;
+  font-family: var(--font-main);
   margin: 0;
   padding: 0;
-  background-color: #fff;
+  background-color: var(--bg-color);
 }
 </style>
