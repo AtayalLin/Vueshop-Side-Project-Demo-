@@ -63,6 +63,11 @@ onMounted(() => {
 .product-page {
   padding: 2rem;
 }
+/* 讓商品頁的導覽列樣式與全站一致：移除任何本頁的覆蓋，僅保留內容區樣式 */
+:deep(.app-navbar) {
+  box-sizing: border-box;
+}
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

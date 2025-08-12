@@ -31,11 +31,8 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  /* Use your theme variables so the effect is immediately visible */
   background-color: var(--bg-color);
   font-family: var(--font-main);
 }
@@ -69,10 +66,11 @@ button:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0; /* 取消外圍多餘留白，讓 Navbar 能左右貼齊 */
+  text-align: initial;
 }
 
 @media (prefers-color-scheme: light) {
@@ -86,4 +84,92 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* === Global UI utilities added === */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+.py-24 {
+  padding-block: 24px;
+}
+/* Wider container for nav/header sections (auto-scales with viewport) */
+.container-wide {
+  width: 100%;
+  max-width: clamp(1440px, 98vw, 1920px);
+  margin-inline: auto;
+  padding-inline: clamp(12px, 2vw, 24px);
+}
+
+/* Navbar base styles unified via .app-navbar */
+.app-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: #ffffffcc; /* 稍透明，營造漂浮感 */
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1); /* 加深陰影 */
+}
+.app-navbar .navbar-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 72px; /* 較寬大 */
+  column-gap: 24px;
+}
+.nav-logo a {
+  font-weight: 800;
+  color: #111827;
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px; /* 放大間距 */
+  padding-left: 0;
+  margin: 0;
+}
+.nav-link {
+  color: #111827;
+  text-decoration: none;
+  padding: 10px 12px; /* 點擊目標更大 */
+  border-radius: 8px;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, color 0.2s ease,
+    background 0.2s ease;
+}
+.nav-link:hover {
+  color: #2f8f74;
+  background: #f3f4f6; /* 淺灰更襯托陰影 */
+  transform: translateY(-1px); /* 微妙漂浮感 */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar three-zone layout helpers */
+.nav-left {
+  justify-self: start;
+}
+.nav-center {
+  justify-self: center;
+}
+.nav-right {
+  justify-self: end;
+}
+
+/* Prevent link wrapping and misalignment */
+.nav-links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.nav-links li {
+  display: inline-flex;
+}
+.nav-link:active {
+  transform: translateY(0); /* 點擊回到原位 */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
 }

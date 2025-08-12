@@ -53,13 +53,17 @@ const handleAddToCart = () => {
 button {
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
-  background: #000;
+  background: #111827;
   color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 button:hover {
-  background: #444;
+  background: #0b1220;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
 }
 </style>
