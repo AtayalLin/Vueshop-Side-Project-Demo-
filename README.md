@@ -1,7 +1,25 @@
-此為新的電商網頁 Demo 
-目前只有基本的登入、登出、註冊、購物車功能。
-未來會再更新介面、排版與切版。
+# 日式電商 Demo
 
+[![Deploy Vite site to GitHub Pages](https://github.com/AtayalLin/Vueshop-Side-Project-Demo-/actions/workflows/deploy.yml/badge.svg)](https://github.com/AtayalLin/Vueshop-Side-Project-Demo-/actions/workflows/deploy.yml)
+
+- 線上網站（GitHub Pages）：https://atayallin.github.io/Vueshop-Side-Project-Demo-/
+- 技術棧：Vue 3 + Vite + Pinia + Vue Router + AOS + GitHub Actions
+- 功能：登入 / 登出、註冊、購物車（加入、清單、總計）
+
+## 本機開發
+
+```bash
+npm ci
+npm run dev
+```
+
+## 部署
+
+推送到 main 會自動部署到 GitHub Pages，Action 檔：.github/workflows/deploy.yml
+
+---
+
+以下為 Vite Template 說明：
 
 # Vue 3 + Vite
 
