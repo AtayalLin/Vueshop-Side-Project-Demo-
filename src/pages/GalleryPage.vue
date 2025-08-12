@@ -16,5 +16,8 @@ onMounted(() => {
 <style scoped>
 .page {
   padding: 2rem;
+  display: grid;
+  place-items: center;
+  text-align: center;
 }
 </style>

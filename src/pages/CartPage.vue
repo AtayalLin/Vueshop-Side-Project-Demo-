@@ -59,6 +59,7 @@ const checkout = () => {
 <style scoped>
 .cart-page {
   padding: 2rem;
+  text-align: center;
 }
 .product-grid {
   display: grid;

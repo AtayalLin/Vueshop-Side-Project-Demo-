@@ -70,21 +70,44 @@ onMounted(() => {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 16px;
   margin-top: 2rem;
+}
+@media (min-width: 600px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+@media (min-width: 1440px) {
+  .product-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 24px;
+  }
 }
 .product-card {
   border: 1px solid #eaeaea;
   border-radius: 8px;
-  padding: 1.5rem;
+  padding: clamp(12px, 2.2vw, 24px);
   text-align: center;
-  transition: transform 0.3s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .product-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 .emoji {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
 }
 </style>

@@ -62,69 +62,159 @@ const remove = () => {
 </script>
 
 <style scoped>
+/* 行動裝置（≤480px）：置中卡片版型 */
 .cart-item {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 12px;
   background: #fff;
-  padding: 1.5rem;
+  padding: clamp(12px, 3.5vw, 20px);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   margin-bottom: 1.5rem;
+  text-align: center;
   transition: transform 0.3s;
 }
 .cart-item:hover {
   transform: translateY(-4px);
 }
+
 .item-left {
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 .emoji {
-  font-size: 3rem;
-  margin-right: 1rem;
+  font-size: clamp(2.2rem, 8vw, 2.8rem);
 }
 .info h3 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: clamp(16px, 4.5vw, 18px);
+  line-height: 1.3;
 }
 .info p {
   margin: 0.25rem 0;
   color: #666;
 }
+
 .item-right {
-  text-align: right;
+  width: 100%;
 }
 .quantity-control {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  justify-content: center;
+  gap: 10px;
+  margin: 6px 0 8px;
 }
 .quantity-control button {
-  padding: 0.3rem 0.75rem;
-  font-size: 1rem;
+  min-width: 36px;
+  height: 36px;
+  padding: 0;
+  font-size: clamp(14px, 3.8vw, 16px);
   background-color: #f3f4f6;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
   cursor: pointer;
 }
 .quantity-control span {
-  font-weight: bold;
-  min-width: 1.5rem;
+  font-weight: 700;
+  min-width: 1.75rem;
   text-align: center;
 }
+.item-right p {
+  margin: 0.25rem 0 0.5rem;
+}
 .delete-btn {
-  margin-top: 0.5rem;
-  padding: 0.25rem 0.75rem;
+  padding: 8px 16px;
   background-color: #f87171;
-  color: white;
-  border: none;
-  border-radius: 6px;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
   cursor: pointer;
 }
 .delete-btn:hover {
   background-color: #ef4444;
+}
+
+/* 平板與桌面（≥600px）：左右排列，更好的視覺層次 */
+@media (min-width: 600px) {
+  .cart-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    padding: 20px 24px;
+    gap: 20px;
+  }
+  .item-left {
+    flex: 1 1 auto;
+    justify-content: flex-start;
+    gap: 16px;
+  }
+  .emoji {
+    font-size: 3rem;
+  }
+  .info h3 {
+    font-size: 1.2rem;
+  }
+  .info p {
+    font-size: 0.95rem;
+  }
+  .item-right {
+    flex: 0 0 auto;
+    width: auto;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  .quantity-control {
+    justify-content: flex-end;
+    margin: 0;
+  }
+  .quantity-control button {
+    min-width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+  .item-right p {
+    margin: 0;
+    font-weight: 600;
+  }
+  .delete-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* 大桌面（≥1024px）：更寬鬆的間距與更大的觸控區域 */
+@media (min-width: 1024px) {
+  .cart-item {
+    padding: 24px 28px;
+    gap: 24px;
+  }
+  .item-left {
+    gap: 20px;
+  }
+  .emoji {
+    font-size: 3.5rem;
+  }
+  .info h3 {
+    font-size: 1.35rem;
+  }
+  .quantity-control button {
+    min-width: 36px;
+    height: 36px;
+    font-size: 15px;
+  }
+  .delete-btn {
+    padding: 8px 16px;
+    font-size: 1rem;
+  }
 }
 </style>

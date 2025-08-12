@@ -1,16 +1,52 @@
 <script setup>
+import { ref, watch, onUnmounted } from "vue";
+import { useRoute } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
 
 const authStore = useAuthStore();
 const { user } = storeToRefs(authStore);
+
+const isDrawerOpen = ref(false);
+const toggleDrawer = () => (isDrawerOpen.value = !isDrawerOpen.value);
+const closeDrawer = () => (isDrawerOpen.value = false);
+
+// Prevent background scroll when drawer is open
+const disableScroll = () => {
+  const el = document.documentElement;
+  el.style.overflow = "hidden";
+};
+const enableScroll = () => {
+  const el = document.documentElement;
+  el.style.overflow = "";
+};
+watch(isDrawerOpen, (open) => (open ? disableScroll() : enableScroll()));
+
+// Auto-close drawer on route change
+const route = useRoute();
+watch(
+  () => route.fullPath,
+  () => {
+    closeDrawer();
+    enableScroll();
+  }
+);
+
+onUnmounted(() => enableScroll());
 </script>
 <template>
   <nav class="app-navbar">
     <div class="nav-logo">
       <router-link to="/">🛍️ 日式電商</router-link>
     </div>
-    <ul class="nav-links">
+
+    <!-- 漢堡按鈕（≤768 顯示） -->
+    <button class="hamburger" @click="toggleDrawer" aria-label="Open menu">
+      ☰
+    </button>
+
+    <!-- 桌面版連結 -->
+    <ul class="nav-links desktop">
       <li><router-link to="/">回首頁</router-link></li>
       <li><router-link to="/products">商品</router-link></li>
       <li><router-link to="/gallery">相簿</router-link></li>
@@ -25,6 +61,61 @@ const { user } = storeToRefs(authStore);
       </li>
       <li><router-link to="/cart">🛒</router-link></li>
     </ul>
+
+    <!-- 手機/平板 Popover（右上角彈出） - 使用 Teleport 直接掛到 <body>，避免被任何父層裁切 -->
+    <teleport to="body">
+      <div v-if="isDrawerOpen" class="backdrop" @click="closeDrawer"></div>
+      <aside
+        class="menu-popover"
+        :class="{ open: isDrawerOpen }"
+        @click.self="closeDrawer"
+        role="dialog"
+        aria-modal="true"
+      >
+        <button
+          class="popover-close"
+          @click="closeDrawer"
+          aria-label="Close menu"
+        >
+          ✕
+        </button>
+        <ul class="popover-links">
+          <li>
+            <router-link to="/" @click.native="closeDrawer">回首頁</router-link>
+          </li>
+          <li>
+            <router-link to="/products" @click.native="closeDrawer"
+              >商品</router-link
+            >
+          </li>
+          <li>
+            <router-link to="/gallery" @click.native="closeDrawer"
+              >相簿</router-link
+            >
+          </li>
+          <li v-if="!user || !user.email">
+            <router-link to="/login" @click.native="closeDrawer"
+              >登入會員</router-link
+            >
+          </li>
+          <li v-if="!user || !user.email">
+            <router-link to="/register" @click.native="closeDrawer"
+              >註冊成為會員</router-link
+            >
+          </li>
+          <li v-if="user && user.email">
+            <router-link to="/member" @click.native="closeDrawer"
+              >會員中心</router-link
+            >
+          </li>
+          <li>
+            <router-link to="/cart" @click.native="closeDrawer"
+              >🛒 購物車</router-link
+            >
+          </li>
+        </ul>
+      </aside>
+    </teleport>
   </nav>
 </template>
 
@@ -47,6 +138,14 @@ const { user } = storeToRefs(authStore);
   border-bottom: 1px solid #e5e7eb;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   overflow-x: hidden;
+}
+.hamburger {
+  display: none;
+  background: transparent;
+  border: 0;
+  font-size: 24px;
+  padding: 8px;
+  border-radius: 8px;
 }
 .nav-logo a {
   font-size: 1.5rem;
@@ -77,5 +176,73 @@ const { user } = storeToRefs(authStore);
   background: #f3f4f6;
   transform: translateY(-1px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+}
+
+/* Popover styles */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: saturate(120%) blur(1px);
+  z-index: 299;
+}
+.menu-popover {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  width: min(92vw, 360px);
+  max-height: calc(100vh - 24px);
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+  padding: 14px 12px 12px;
+  transform: translate(8px, -8px) scale(0.96);
+  transform-origin: top right;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+  z-index: 300;
+  overflow-y: auto;
+}
+.menu-popover.open {
+  transform: translate(0, 0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+.popover-close {
+  position: sticky;
+  top: 0;
+  margin-left: auto;
+  background: transparent;
+  border: 0;
+  font-size: 20px;
+  padding: 6px;
+}
+.popover-links {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.popover-links a {
+  padding: 10px 12px;
+  border-radius: 8px;
+  display: block;
+}
+.popover-links a:hover {
+  background: #f3f4f6;
+}
+
+/* Responsive behaviors */
+@media (max-width: 768px) {
+  .hamburger {
+    display: inline-flex;
+  }
+  .nav-links.desktop {
+    display: none;
+  }
 }
 </style>
