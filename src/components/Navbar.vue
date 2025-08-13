@@ -57,6 +57,9 @@ onUnmounted(() => enableScroll());
       <li><router-link to="/">回首頁</router-link></li>
       <li><router-link to="/products">商品</router-link></li>
       <li><router-link to="/gallery">相簿</router-link></li>
+      <li v-if="user && user.email">
+        <router-link to="/orders">訂單</router-link>
+      </li>
       <li v-if="!user || !user.email">
         <router-link to="/login">登入會員</router-link>
       </li>
@@ -117,6 +120,11 @@ onUnmounted(() => enableScroll());
           <li v-if="user && user.email">
             <router-link to="/member" @click.native="closeDrawer"
               >會員中心</router-link
+            >
+          </li>
+          <li v-if="user && user.email">
+            <router-link to="/orders" @click.native="closeDrawer"
+              >訂單</router-link
             >
           </li>
           <li>
