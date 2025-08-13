@@ -57,6 +57,12 @@ const total = computed(() =>
 
 // 結帳動作（目前僅提示）
 const checkout = () => {
+  if (cart.cartItems.length === 0) {
+    if (confirm("購物車是空的，前往商品頁逛逛？")) {
+      window.location.href = "/products";
+    }
+    return;
+  }
   alert("🚀 模擬結帳流程開始！");
 };
 </script>

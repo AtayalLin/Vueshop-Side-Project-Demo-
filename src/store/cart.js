@@ -3,13 +3,15 @@ import { ref } from "vue";
 
 export const useCartStore = defineStore("cart", () => {
   const cartItems = ref([]);
+  const MIN_QTY = 1;
+  const MAX_QTY = 99;
 
   function addToCart(product) {
     const existing = cartItems.value.find((item) => item.id === product.id);
     if (existing) {
-      existing.quantity++;
+      existing.quantity = Math.min(MAX_QTY, existing.quantity + 1);
     } else {
-      cartItems.value.push({ ...product, quantity: 1 });
+      cartItems.value.push({ ...product, quantity: MIN_QTY });
     }
   }
 
@@ -17,17 +19,16 @@ export const useCartStore = defineStore("cart", () => {
     cartItems.value = cartItems.value.filter((item) => item.id !== productId);
   }
 
-  // 新增：增加數量
   function increaseQuantity(productId) {
     const item = cartItems.value.find((item) => item.id === productId);
-    if (item) item.quantity++;
+    if (item) item.quantity = Math.min(MAX_QTY, item.quantity + 1);
   }
 
-  // 新增：減少數量（數量為 0 時自動移除）
   function decreaseQuantity(productId) {
     const item = cartItems.value.find((item) => item.id === productId);
-    if (item && item.quantity > 1) {
-      item.quantity--;
+    if (!item) return;
+    if (item.quantity > MIN_QTY) {
+      item.quantity -= 1;
     } else {
       removeFromCart(productId);
     }
@@ -39,5 +40,7 @@ export const useCartStore = defineStore("cart", () => {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
+    MIN_QTY,
+    MAX_QTY,
   };
 });
