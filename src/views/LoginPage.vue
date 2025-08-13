@@ -1,14 +1,22 @@
 <template>
   <div class="register-container" data-aos="fade-up">
     <h2>會員登入</h2>
-    <input type="email" placeholder="請輸入 Email" v-model="email" required />
-    <input
-      type="password"
-      placeholder="請輸入密碼"
-      v-model="password"
-      required
-    />
-    <button @click="handleLogin">登入</button>
+    <form @submit.prevent="handleLogin">
+      <input
+        type="email"
+        placeholder="請輸入 Email"
+        v-model.trim="email"
+        required
+      />
+      <input
+        type="password"
+        placeholder="請輸入密碼"
+        v-model.trim="password"
+        minlength="6"
+        required
+      />
+      <button type="submit">登入</button>
+    </form>
     <div v-if="errorMsg" class="error-msg">❌ {{ errorMsg }}</div>
     <div class="login-links" style="margin-top: 16px">
       <router-link to="/register">註冊會員</router-link>
@@ -38,7 +46,9 @@ const handleLogin = async () => {
   });
   if (result) {
     toast.success("登入成功！");
-    router.push("/member");
+    // 支援 redirect 回原頁
+    const redirect = router.currentRoute.value.query.redirect || "/member";
+    router.push(redirect);
     errorMsg.value = "";
   } else {
     errorMsg.value = "登入失敗，請確認帳號密碼";

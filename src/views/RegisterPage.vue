@@ -17,7 +17,9 @@
       v-model="signupField.nickname"
     />
 
-    <button @click="signup">註冊</button>
+    <form @submit.prevent="signup">
+      <button type="submit">註冊</button>
+    </form>
 
     <div v-if="signupRes" class="success-msg">
       ✅ 註冊成功！UID：{{ signupRes.uid }}
@@ -34,8 +36,10 @@
 import { ref } from "vue";
 import axios from "axios";
 import { useToast } from "vue-toastification";
+import { useRouter } from "vue-router";
 
 const toast = useToast();
+const router = useRouter();
 const api = "https://todolist-api.hexschool.io";
 
 const signupField = ref({
@@ -55,6 +59,7 @@ const signup = async () => {
     signupRes.value = res.data;
     errorMsg.value = "";
     toast.success("註冊成功，請前往登入");
+    router.push({ name: "Login" });
   } catch (err) {
     console.log("[註冊流程] ❌ 註冊失敗:", err.response?.data || err);
     errorMsg.value = err.response?.data?.message || "發生未知錯誤";

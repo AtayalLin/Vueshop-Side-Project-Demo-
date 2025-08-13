@@ -45,27 +45,19 @@
 </template>
 <script setup>
 import { ref, onMounted } from "vue";
+import { listOrders, removeOrder } from "@/services/ordersService";
 
 const orders = ref([]);
 const toastMsg = ref("");
 let toastTimer = null;
 
 onMounted(() => {
-  try {
-    const raw = JSON.parse(localStorage.getItem("orders") || "[]");
-    // 兼容舊資料，無 createdAt 時用現在時間
-    orders.value = raw.map((o) => ({
-      createdAt: o.createdAt || Date.now(),
-      ...o,
-    }));
-  } catch (e) {
-    orders.value = [];
-  }
+  orders.value = listOrders();
 });
 
 function cancelOrder(id) {
-  orders.value = orders.value.filter((o) => o.id !== id);
-  localStorage.setItem("orders", JSON.stringify(orders.value));
+  removeOrder(id);
+  orders.value = listOrders();
   showToast("已取消並移除該筆訂單");
 }
 

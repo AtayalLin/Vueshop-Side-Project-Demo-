@@ -77,13 +77,21 @@ const router = createRouter({
 
 // 基本路由保護：需要登入的頁面
 router.beforeEach((to, from, next) => {
-  const protectedNames = new Set(["Orders", "Profile"]);
+  const needAuth = new Set(["Orders", "Profile"]);
+  const guestOnly = new Set(["Login", "Register"]);
   const token = localStorage.getItem("token") || "";
-  if (protectedNames.has(to.name) && !token) {
-    next({ name: "Login", query: { redirect: to.fullPath } });
-  } else {
-    next();
+
+  // 受保護頁：未登入導向登入並帶 redirect
+  if (needAuth.has(to.name) && !token) {
+    return next({ name: "Login", query: { redirect: to.fullPath } });
   }
+
+  // 僅訪客頁：若已登入導向會員中心
+  if (guestOnly.has(to.name) && token) {
+    return next({ name: "Member" });
+  }
+
+  return next();
 });
 
 export default router;
