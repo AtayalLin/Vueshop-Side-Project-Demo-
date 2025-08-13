@@ -120,9 +120,14 @@ onUnmounted(() => enableScroll());
             >
           </li>
           <li>
-            <router-link to="/cart" @click.native="closeDrawer"
-              >🛒 購物車</router-link
+            <router-link
+              to="/cart"
+              @click.native="closeDrawer"
+              class="cart-link"
             >
+              🛒 購物車
+              <span v-if="cartCount" class="badge">{{ cartCount }}</span>
+            </router-link>
           </li>
         </ul>
       </aside>
