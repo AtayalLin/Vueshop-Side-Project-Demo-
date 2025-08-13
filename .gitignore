@@ -9,6 +9,12 @@ lerna-debug.log*
 
 node_modules
 dist
+# Ignore Playwright/Vitest output
+playwright-report
+blob-report
+coverage
+test-results
+
 dist-ssr
 *.local
 
