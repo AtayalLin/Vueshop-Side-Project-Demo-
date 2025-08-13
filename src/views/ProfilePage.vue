@@ -33,30 +33,34 @@ const auth = useAuthStore();
   margin: 0.5rem 0;
 }
 
-/* 僅在小/中/大型行動裝置調整版面，置中且避免文字外溢 */
+/* 僅在小/中/大型行動裝置與平板電腦下調整：上方標題置中、卡片置中、欄位由上往下排列 */
 @media (max-width: 480px),
   (min-width: 600px) and (max-width: 767px),
-  (min-width: 768px) and (max-width: 1023px) {
+  (min-width: 768px) and (max-width: 1023px),
+  (min-width: 1024px) and (max-width: 1279px) {
   .profile {
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* 讓 h2 在上、卡片在下 */
+    align-items: center; /* 標題與卡片都置中 */
+    padding: 16px 0 24px; /* 移除左右 padding，避免視覺偏移 */
+    width: 100%;
   }
   .card {
-    width: min(92vw, 520px);
+    width: min(94vw, 520px);
     margin-inline: auto;
   }
   .row {
-    display: grid;
-    grid-template-columns: auto 1fr;
+    display: flex;
+    flex-direction: column; /* label 在上，值在下 */
     align-items: center;
-    column-gap: 12px;
+    gap: 4px;
+    text-align: center;
   }
   .row > span,
   .row > strong {
     max-width: 100%;
     overflow-wrap: anywhere;
     word-break: break-word;
-    text-align: left;
   }
 }
 </style>

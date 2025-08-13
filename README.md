@@ -1,3 +1,38 @@
+## Analytics 可選配置（GA4 / Sentry）
+
+本專案預設不啟用分析與錯誤回報；只有在設定環境變數時才會載入：
+
+1. 建立 .env.local（不提交版本庫），加入以下任意一項或兩項：
+
+VITE_GA_ID=G-XXXXXXXXXX
+VITE_SENTRY_DSN=https://<key>@sentry.io/<project>
+
+2. 本地啟動/建置時不需要這些變數，缺少時不會報錯；在 src/analytics/index.js 中會檢查是否有值，再決定是否載入 GA4 與 Sentry。
+
+3. 事件與頁面檢視
+
+- GA4：透過 dataLayer 推送簡單 pageview（router.afterEach）
+- Sentry：以低採樣率 tracesSampleRate: 0.1 啟用（可自行調整）
+
+建議：生產環境再配置，將 .env.production 帶入部署平台的秘密變數中。
+
+---
+
+## CI 鎖檔同步（npm ci 失敗排查）
+
+CI 以 npm ci 安裝依賴時，要求 package.json 與 package-lock.json 完全一致；若你在本地新增/移除套件但沒有提交更新後的 package-lock.json，就會出現下列錯誤：
+
+`npm ci can only install packages when your package.json and package-lock.json are in sync...`
+
+解法（在本地修正後推送）：
+
+1. 確保沒有未提交更動
+2. 執行 npm install（會更新 package-lock.json）
+3. 提交 package-lock.json 與任何依賴變更
+4. CI 重新跑 npm ci 應能成功
+
+補充：若希望 CI 跳過 devDependencies，可改用 `npm ci --omit=dev`，但本專案預設仍需要 devDependencies（測試、建置），建議保持預設。
+
 # 日式電商 Demo
 
 [![Deploy Vite site to GitHub Pages](https://github.com/AtayalLin/Vueshop-Side-Project-Demo-/actions/workflows/deploy.yml/badge.svg)](https://github.com/AtayalLin/Vueshop-Side-Project-Demo-/actions/workflows/deploy.yml)
