@@ -19,13 +19,15 @@ const auth = useAuthStore();
 </script>
 <style scoped>
 .profile {
-  padding: 24px;
+  padding: 24px 0;
+  width: 100%;
 }
 .card {
   background: #fff;
   border: 1px solid #eee;
   border-radius: 12px;
   padding: 16px;
+  width: 100%;
 }
 .row {
   display: flex;
@@ -46,7 +48,8 @@ const auth = useAuthStore();
     width: 100%;
   }
   .card {
-    width: min(94vw, 520px);
+    width: 100%;
+    max-width: 520px;
     margin-inline: auto;
   }
   .row {

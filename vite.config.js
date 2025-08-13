@@ -15,5 +15,9 @@ export default defineConfig(({ mode }) => {
         "@": path.resolve(__dirname, "./src"),
       },
     },
+    // Vitest 設定：排除 node_modules 與 e2e 測試，以避免抓到外部套件的測試
+    test: {
+      exclude: ["node_modules/**", "tests/e2e/**"],
+    },
   };
 });
