@@ -27,4 +27,9 @@ app.use(Toast, {
   transition: "Vue-Toastification__fade",
 });
 
+// Conditional analytics (GA4 / Sentry) – only when env provided
+import("./analytics/index.js").then(({ initAnalytics }) =>
+  initAnalytics(router)
+);
+
 app.mount("#app");

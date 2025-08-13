@@ -150,6 +150,7 @@ const formatDate = (ts) => new Date(ts).toLocaleString();
   padding: 10px 14px;
   border-radius: 10px;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+  z-index: 350; /* 高於導覽列陰影 */
 }
 .toast-enter-active,
 .toast-leave-active {

@@ -12,7 +12,23 @@
       </select>
     </div>
 
-    <div class="product-grid">
+    <!-- Skeleton -->
+    <div v-if="loading" class="product-grid">
+      <div v-for="n in 8" :key="n" class="skeleton-card" />
+    </div>
+
+    <!-- Empty state -->
+    <div
+      v-else-if="filteredSorted.length === 0"
+      class="empty"
+      data-aos="fade-up"
+    >
+      <p>找不到符合的商品</p>
+      <small>請調整關鍵字或排序看看</small>
+    </div>
+
+    <!-- List -->
+    <div v-else class="product-grid">
       <ProductCard
         v-for="(item, i) in filteredSorted"
         :key="item.id"
@@ -32,7 +48,8 @@ import "aos/dist/aos.css";
 import "../assets/aos-custom.css";
 
 import { listProducts } from "@/services/productsService";
-const products = ref(listProducts());
+const products = ref([]);
+const loading = ref(true);
 
 const keyword = ref("");
 const sortBy = ref("name-asc");
@@ -67,6 +84,9 @@ const getAosType = (index) => {
 };
 
 onMounted(() => {
+  products.value = listProducts();
+  // 模擬極短載入延遲以顯示 skeleton
+  setTimeout(() => (loading.value = false), 200);
   AOS.init({
     duration: 600,
     easing: "ease-in-out",
@@ -89,9 +109,11 @@ onMounted(() => {
   display: flex;
   gap: 8px;
   margin-top: 12px;
+  flex-wrap: wrap;
 }
 .input {
-  flex: 1;
+  flex: 1 1 220px;
+  min-width: 0;
   padding: 10px 12px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
@@ -130,6 +152,30 @@ onMounted(() => {
     gap: 24px;
   }
 }
+
+/* Skeleton */
+.skeleton-card {
+  height: 180px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #f4f4f4, #ececec, #f4f4f4);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.empty {
+  text-align: center;
+  padding: 24px 16px;
+  color: #6b7280;
+}
+
 .product-card {
   border: 1px solid #eaeaea;
   border-radius: 8px;

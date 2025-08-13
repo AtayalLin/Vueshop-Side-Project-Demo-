@@ -38,8 +38,8 @@ const auth = useAuthStore();
   (min-width: 600px) and (max-width: 767px),
   (min-width: 768px) and (max-width: 1023px) {
   .profile {
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
   }
   .card {
     width: min(92vw, 520px);
