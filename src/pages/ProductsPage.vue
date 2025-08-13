@@ -1,9 +1,20 @@
 <template>
   <div class="product-page">
     <h2 data-aos="fade-down">商品一覽</h2>
+
+    <div class="toolbar" data-aos="fade-up" data-aos-delay="50">
+      <input v-model="keyword" class="input" placeholder="搜尋商品名稱…" />
+      <select v-model="sortBy" class="select">
+        <option value="name-asc">名稱（A→Z）</option>
+        <option value="name-desc">名稱（Z→A）</option>
+        <option value="price-asc">價格（低→高）</option>
+        <option value="price-desc">價格（高→低）</option>
+      </select>
+    </div>
+
     <div class="product-grid">
       <ProductCard
-        v-for="(item, i) in products"
+        v-for="(item, i) in filteredSorted"
         :key="item.id"
         :product="item"
         :aos="getAosType(i)"
@@ -14,7 +25,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import ProductCard from "../components/ProductCard.vue";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -38,6 +49,28 @@ const products = ref([
   { id: 15, name: "和風漆器碗", price: 530, emoji: "🥣" },
   { id: 16, name: "手作木托盤", price: 390, emoji: "🪵" },
 ]);
+
+const keyword = ref("");
+const sortBy = ref("name-asc");
+
+const filteredSorted = computed(() => {
+  const k = keyword.value.trim().toLowerCase();
+  const arr = products.value.filter((p) => p.name.toLowerCase().includes(k));
+  switch (sortBy.value) {
+    case "name-desc":
+      arr.sort((a, b) => b.name.localeCompare(a.name));
+      break;
+    case "price-asc":
+      arr.sort((a, b) => a.price - b.price);
+      break;
+    case "price-desc":
+      arr.sort((a, b) => b.price - a.price);
+      break;
+    default:
+      arr.sort((a, b) => a.name.localeCompare(b.name));
+  }
+  return arr;
+});
 
 const getAosType = (index) => {
   const pattern = [
@@ -68,11 +101,28 @@ onMounted(() => {
   box-sizing: border-box;
 }
 
+.toolbar {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+.select {
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: 16px;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 @media (min-width: 600px) {
   .product-grid {

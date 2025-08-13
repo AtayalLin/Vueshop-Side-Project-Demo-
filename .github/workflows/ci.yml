@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - name: Run unit tests
+        run: npm run test -- --run
+      - name: Build
+        run: npm run build
+      - name: Playwright browsers (for e2e, optional)
+        if: ${{ false }}
+        run: npx playwright install --with-deps
+      - name: E2E tests (skipped by default)
+        if: ${{ false }}
+        run: npm run e2e
+

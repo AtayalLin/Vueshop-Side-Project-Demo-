@@ -29,14 +29,26 @@
             </li>
           </ul>
         </div>
+        <div class="actions">
+          <button class="btn-danger" @click="cancelOrder(o.id)">
+            取消訂單
+          </button>
+        </div>
       </li>
     </ul>
+
+    <!-- 浮動通知 -->
+    <transition name="toast">
+      <div class="toast" v-if="toastMsg">{{ toastMsg }}</div>
+    </transition>
   </div>
 </template>
 <script setup>
 import { ref, onMounted } from "vue";
 
 const orders = ref([]);
+const toastMsg = ref("");
+let toastTimer = null;
 
 onMounted(() => {
   try {
@@ -50,6 +62,18 @@ onMounted(() => {
     orders.value = [];
   }
 });
+
+function cancelOrder(id) {
+  orders.value = orders.value.filter((o) => o.id !== id);
+  localStorage.setItem("orders", JSON.stringify(orders.value));
+  showToast("已取消並移除該筆訂單");
+}
+
+function showToast(msg) {
+  toastMsg.value = msg;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => (toastMsg.value = ""), 2200);
+}
 
 const formatDate = (ts) => new Date(ts).toLocaleString();
 </script>
@@ -105,5 +129,43 @@ const formatDate = (ts) => new Date(ts).toLocaleString();
 }
 .items .meta {
   color: #6b7280;
+}
+.actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-danger {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
+  transform: translateY(0);
+  transition: transform 0.12s ease, box-shadow 0.2s ease;
+}
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(239, 68, 68, 0.45);
+}
+.toast {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  background: #111827;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+}
+.toast-enter-active,
+.toast-leave-active {
+  transition: all 0.2s ease;
+}
+.toast-enter-from,
+.toast-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }
 </style>
