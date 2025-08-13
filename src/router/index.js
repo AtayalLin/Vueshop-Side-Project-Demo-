@@ -33,6 +33,11 @@ const routes = [
     component: () => import("@/views/MemberPage.vue"),
   },
   {
+    path: "/profile",
+    name: "Profile",
+    component: () => import("@/views/ProfilePage.vue"),
+  },
+  {
     path: "/cart",
     name: "Cart",
     component: CartPage,
@@ -72,7 +77,7 @@ const router = createRouter({
 
 // 基本路由保護：需要登入的頁面
 router.beforeEach((to, from, next) => {
-  const protectedNames = new Set(["Member", "Orders"]);
+  const protectedNames = new Set(["Member", "Orders", "Profile"]);
   const token = localStorage.getItem("token") || "";
   if (protectedNames.has(to.name) && !token) {
     next({ name: "Login", query: { redirect: to.fullPath } });
