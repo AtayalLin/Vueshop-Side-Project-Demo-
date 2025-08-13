@@ -63,6 +63,19 @@ flowchart LR
 - Checkout 使用表單驗證（vee-validate + Zod），送出後寫入 localStorage 並清空購物車
 - Navbar 徽章數從 Pinia cart 取得，桌面與抽屜選單都會顯示
 
+## 測試用折扣碼（Demo）
+
+- SAVE100：立減 100 元
+- SAVE10：九折（10% off）
+- FREESHIP：免運（運費變 0）
+
+使用方式：在 Checkout 頁面的「訂單摘要」輸入折扣碼即可生效（免運會直接把運費顯示為 0）。
+
+## 訂單列表（Orders）
+
+- 成功結帳後會將訂單寫入瀏覽器 localStorage
+- 可到 /orders 查看最近訂單摘要（訂單編號、時間、品項數、金額）
+
 ---
 
 以下為 Vite Template 說明：

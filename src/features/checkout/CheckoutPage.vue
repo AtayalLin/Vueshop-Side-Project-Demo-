@@ -84,6 +84,13 @@
             折扣：<strong>-{{ discount }} 元</strong>
           </li>
         </ul>
+        <div class="coupon">
+          <input
+            v-model="couponCode"
+            placeholder="輸入折扣碼（SAVE100 / SAVE10 / FREESHIP）"
+          />
+          <small class="hint">免運請輸入 FREESHIP（運費會顯示為 0）</small>
+        </div>
         <p class="total">
           應付金額：<strong>{{ total }} 元</strong>
         </p>
@@ -94,13 +101,17 @@
 
 <script setup>
 import { computed } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useCartStore } from "@/store/cart";
 import {
   calcSubtotal,
   calcShipping,
   calcTotal,
+  applyCouponCode,
+  isFreeShipCode,
 } from "@/composables/usePricing";
+
 import { Form, Field, ErrorMessage } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import { z } from "zod";
@@ -111,10 +122,15 @@ const cart = useCartStore();
 // derived values
 const hasItems = computed(() => cart.cartItems.length > 0);
 const subtotal = computed(() => calcSubtotal(cart.cartItems));
+const couponCode = ref("");
 const shipping = computed(() =>
-  calcShipping(subtotal.value, { base: 80, freeThreshold: 999 })
+  isFreeShipCode(couponCode.value)
+    ? 0
+    : calcShipping(subtotal.value, { base: 80, freeThreshold: 999 })
 );
-const discount = computed(() => 0);
+const discount = computed(() =>
+  applyCouponCode(subtotal.value, couponCode.value)
+);
 const total = computed(() =>
   calcTotal({
     subtotal: subtotal.value,
@@ -161,7 +177,13 @@ function onSubmit(values) {
   if (!hasItems.value) return;
   const id = `ORD-${Date.now().toString(36)}`;
   const orders = JSON.parse(localStorage.getItem("orders") || "[]");
-  orders.push({ id, items: cart.cartItems, form: values, total: total.value });
+  orders.push({
+    id,
+    items: cart.cartItems,
+    form: values,
+    total: total.value,
+    createdAt: Date.now(),
+  });
   localStorage.setItem("orders", JSON.stringify(orders));
   cart.cartItems = [];
   router.push({ name: "OrderSuccess", query: { id } });
@@ -218,6 +240,19 @@ select {
   background: #111827;
   color: #fff;
   cursor: pointer;
+}
+.coupon {
+  margin-top: 8px;
+}
+.coupon input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.coupon .hint {
+  color: #6b7280;
+  font-size: 12px;
 }
 .total {
   margin-top: 8px;
