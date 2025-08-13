@@ -71,7 +71,7 @@ onUnmounted(() => enableScroll());
       <li v-if="!user || !user.email">
         <router-link to="/register">註冊成為會員</router-link>
       </li>
-      <li v-if="user && user.email">
+      <li>
         <router-link to="/member">會員中心</router-link>
       </li>
       <li>
@@ -122,7 +122,7 @@ onUnmounted(() => enableScroll());
               >註冊成為會員</router-link
             >
           </li>
-          <li v-if="user && user.email">
+          <li>
             <router-link to="/member" @click.native="closeDrawer"
               >會員中心</router-link
             >
