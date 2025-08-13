@@ -30,7 +30,12 @@
             <p>
               總金額：<strong>{{ total }} 元</strong>
             </p>
-            <button class="checkout-btn" @click="checkout">前往結帳</button>
+            <div class="actions">
+              <button class="checkout-btn" @click="checkout">前往結帳</button>
+              <router-link to="/checkout" class="checkout-btn alt"
+                >使用新版結帳</router-link
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -132,9 +137,12 @@ const checkout = () => {
 .total {
   margin-top: 1rem;
 }
-
+.actions {
+  display: grid;
+  gap: 8px;
+}
 .checkout-btn {
-  margin-top: 1rem;
+  margin-top: 0;
   width: 100%;
   padding: 0.75rem;
   background-color: #111827;
@@ -143,6 +151,10 @@ const checkout = () => {
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
+  text-align: center;
+}
+.checkout-btn.alt {
+  background: #0b5;
 }
 .checkout-btn:hover {
   background-color: #374151;

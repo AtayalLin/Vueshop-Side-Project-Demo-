@@ -37,6 +37,17 @@ const routes = [
     name: "Cart",
     component: CartPage,
   },
+  // New: Checkout flow (non-invasive)
+  {
+    path: "/checkout",
+    name: "Checkout",
+    component: () => import("@/features/checkout/CheckoutPage.vue"),
+  },
+  {
+    path: "/order-success",
+    name: "OrderSuccess",
+    component: () => import("@/features/checkout/OrderSuccessPage.vue"),
+  },
   {
     path: "/register",
     name: "Register",

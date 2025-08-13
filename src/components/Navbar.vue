@@ -1,11 +1,18 @@
 <script setup>
-import { ref, watch, onUnmounted } from "vue";
+import { ref, watch, onUnmounted, computed } from "vue";
 import { useRoute } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
+import { useCartStore } from "@/store/cart";
 
 const authStore = useAuthStore();
 const { user } = storeToRefs(authStore);
+
+// cart badge
+const cartStore = useCartStore();
+const cartCount = computed(() =>
+  (cartStore.cartItems || []).reduce((n, it) => n + (it.quantity || 0), 0)
+);
 
 const isDrawerOpen = ref(false);
 const toggleDrawer = () => (isDrawerOpen.value = !isDrawerOpen.value);
@@ -59,7 +66,11 @@ onUnmounted(() => enableScroll());
       <li v-if="user && user.email">
         <router-link to="/member">會員中心</router-link>
       </li>
-      <li><router-link to="/cart">🛒</router-link></li>
+      <li>
+        <router-link to="/cart" class="cart-link">
+          🛒<span v-if="cartCount" class="badge">{{ cartCount }}</span>
+        </router-link>
+      </li>
     </ul>
 
     <!-- 手機/平板 Popover（右上角彈出） - 使用 Teleport 直接掛到 <body>，避免被任何父層裁切 -->
@@ -244,5 +255,26 @@ onUnmounted(() => enableScroll());
   .nav-links.desktop {
     display: none;
   }
+}
+
+/* badge */
+.cart-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  padding: 3px 6px;
+  border-radius: 999px;
+  min-width: 18px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 </style>
