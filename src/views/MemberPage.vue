@@ -17,8 +17,8 @@
         @click.self="showModal = false"
       >
         <div class="modal" data-aos="zoom-in">
-          <h3>請先前往登入頁面或註冊會員頁面</h3>
-          <div class="modal-actions">
+          <h3 class="title">請先前往登入頁面或註冊會員頁面</h3>
+          <div class="modal-actions center">
             <router-link
               to="/login"
               @click.native="showModal = false"
@@ -114,6 +114,13 @@ const handleLogout = () => {
   border-radius: 16px;
   padding: 20px;
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+}
+.title {
+  margin: 0;
+  text-align: center;
+}
+.modal-actions.center {
+  justify-content: center;
 }
 .modal-actions {
   margin-top: 12px;
