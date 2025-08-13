@@ -9,7 +9,7 @@
           :validation-schema="schema"
           :initial-values="initialValues"
           @submit="onSubmit"
-          v-slot="{ meta, isSubmitting }"
+          v-slot="{ meta, isSubmitting, values }"
         >
           <div class="grid">
             <label>
@@ -48,12 +48,25 @@
             </label>
           </div>
 
+          <div class="grid" v-if="values.payment === 'card'">
+            <label class="col-2">
+              卡號
+              <Field
+                name="cardNumber"
+                as="input"
+                inputmode="numeric"
+                placeholder="僅輸入數字，12–19 位"
+              />
+              <ErrorMessage name="cardNumber" class="err" />
+            </label>
+          </div>
+
           <button
             type="submit"
             class="primary"
             :disabled="isSubmitting || !meta.valid || !hasItems"
           >
-            送出訂單（模擬）
+            {{ isSubmitting ? "送出中…" : "送出訂單（模擬）" }}
           </button>
         </Form>
       </section>
@@ -117,10 +130,22 @@ const schema = toTypedSchema(
     phone: z
       .string()
       .min(6, "電話格式不正確")
-      .regex(/^[0-9\-+ ]+$/, "請輸入數字或 - 符號"),
+      .regex(/^[0-9\- ]+$/, "請輸入數字或 - 符號"),
     address: z.string().min(3, "請填寫完整地址"),
     shipping: z.enum(["home", "store"]),
     payment: z.enum(["card", "cod"]),
+    cardNumber: z
+      .string()
+      .optional()
+      .transform((v) => (v ?? "").replace(/\s+/g, ""))
+      .refine((v, ctx) => {
+        // 若付款方式是信用卡，卡號必填且長度 12–19 且皆為數字
+        const payingCard = ctx?.parent?.payment === "card";
+        if (!payingCard) return true;
+        if (!v) return false;
+        if (!/^\d{12,19}$/.test(v)) return false;
+        return true;
+      }, "請輸入正確卡號（12–19 位數字）"),
   })
 );
 
