@@ -190,33 +190,36 @@ p {
 /* === Theme presets === */
 /* Default Wabi */
 [data-theme="wabi"] {
-  --nav-bg: rgba(255, 255, 255, 0.85);
-  --nav-text: #111827;
-  --nav-muted: #374151;
+  /* 深色暖米色（溫暖茶褐調） */
+  --nav-bg: rgba(42, 37, 32, 0.94); /* #2A2520 */
+  --nav-text: #f6f3ed;
+  --nav-muted: #d7d1c8;
   --nav-accent: #d4a373;
-  --nav-border: #e5e7eb;
-  --nav-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  --nav-hover-bg: rgba(0, 0, 0, 0.04);
+  --nav-border: #3a332b;
+  --nav-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --nav-hover-bg: rgba(255, 255, 255, 0.08);
 }
 /* Neon */
 [data-theme="neon"] {
-  --nav-bg: rgba(11, 18, 32, 0.92);
-  --nav-text: #f9fafb;
+  /* 深色夜間霓虹（更高對比） */
+  --nav-bg: rgba(10, 14, 22, 0.96); /* #0A0E16 */
+  --nav-text: #f8fafc;
   --nav-muted: #cbd5e1;
-  --nav-accent: #3ee0d0;
-  --nav-border: #223048;
-  --nav-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  --nav-hover-bg: rgba(255, 255, 255, 0.1);
+  --nav-accent: #3ee0d0; /* 青綠霓虹 */
+  --nav-border: #1b2436;
+  --nav-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
+  --nav-hover-bg: rgba(255, 255, 255, 0.12);
 }
 /* Washi */
 [data-theme="washi"] {
-  --nav-bg: rgba(255, 255, 255, 0.95);
-  --nav-text: #1b1f24;
-  --nav-muted: #4b5563;
-  --nav-hover-bg: #fafafa;
-  --nav-accent: #2f8f74;
-  --nav-border: #e6e6e6;
-  --nav-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  /* 深色和紙極簡（墨綠灰調） */
+  --nav-bg: rgba(26, 34, 32, 0.94); /* #1A2220 */
+  --nav-text: #f1f5f9;
+  --nav-muted: #a7b3a9;
+  --nav-hover-bg: rgba(255, 255, 255, 0.08);
+  --nav-accent: #6ab79a; /* 松綠變體，避免過暗 */
+  --nav-border: #2b3a35;
+  --nav-shadow: 0 10px 28px rgba(0, 0, 0, 0.46);
 }
 
 /* Font pairing per theme (applied to navbar only to avoid global jump) */
@@ -236,9 +239,13 @@ p {
 /* Use variables for navbar */
 .app-navbar {
   background: var(--nav-bg);
+  background-color: var(
+    --nav-bg
+  ); /* ensure explicit background-color changes with theme */
   color: var(--nav-text);
   border-bottom-color: var(--nav-border);
   box-shadow: var(--nav-shadow);
+  transition: background-color 0.25s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 .app-navbar .nav-links a {
   color: var(--nav-text);
