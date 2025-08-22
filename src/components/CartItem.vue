@@ -1,7 +1,10 @@
 <template>
   <div class="cart-item" data-aos="fade-up">
     <div class="item-left">
-      <div class="emoji">{{ product.emoji }}</div>
+      <div v-if="imgBase" class="thumb">
+        <img :src="`${imgDir}/${imgBase}-640.webp`" alt="" />
+      </div>
+      <div v-else class="emoji">{{ product.emoji }}</div>
       <div class="info">
         <h3>{{ product.name }}</h3>
         <p>單價：{{ product.price }} 元</p>
@@ -23,6 +26,7 @@
 import { useCartStore } from "../store/cart";
 import { computed } from "vue";
 import { useToast } from "vue-toastification";
+import { productImages } from "@/data/productImages";
 
 // ✅ 接收 props 並強制要求存在
 const props = defineProps({
@@ -34,6 +38,22 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+});
+
+const imgDir = "/images/products";
+const key = computed(() => (props.product?.name || "").toLowerCase());
+const imgBase = computed(() => {
+  if (key.value.includes("茶壺") || key.value.includes("teapot"))
+    return productImages.teapot;
+  if (key.value.includes("茶杯") || key.value.includes("teacup"))
+    return productImages.teacup;
+  if (key.value.includes("便當") || key.value.includes("bento"))
+    return productImages.bento;
+  if (key.value.includes("筷") || key.value.includes("chopstick"))
+    return productImages.chopsticks;
+  if (key.value.includes("燈籠") || key.value.includes("lantern"))
+    return productImages.lantern;
+  return "";
 });
 
 const cart = useCartStore();
@@ -86,6 +106,13 @@ const remove = () => {
   align-items: center;
   justify-content: center;
   gap: 12px;
+}
+.thumb img {
+  width: 72px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
 }
 .emoji {
   font-size: clamp(2.2rem, 8vw, 2.8rem);

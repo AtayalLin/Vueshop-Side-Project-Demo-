@@ -187,6 +187,49 @@ p {
   padding-inline: clamp(12px, 2vw, 24px);
 }
 
+/* === Theme presets === */
+/* Default Wabi */
+[data-theme="wabi"] {
+  --nav-bg: rgba(255, 255, 255, 0.85);
+  --nav-text: #111827;
+  --nav-muted: #374151;
+  --nav-accent: #d4a373;
+  --nav-border: #e5e7eb;
+  --nav-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+/* Neon */
+[data-theme="neon"] {
+  --nav-bg: rgba(11, 18, 32, 0.85);
+  --nav-text: #f9fafb;
+  --nav-muted: #cbd5e1;
+  --nav-accent: #3ee0d0;
+  --nav-border: #223048;
+  --nav-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+/* Washi */
+[data-theme="washi"] {
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-text: #1b1f24;
+  --nav-muted: #4b5563;
+  --nav-accent: #2f8f74;
+  --nav-border: #e6e6e6;
+  --nav-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Use variables for navbar */
+.app-navbar {
+  background: var(--nav-bg);
+  color: var(--nav-text);
+  border-bottom-color: var(--nav-border);
+  box-shadow: var(--nav-shadow);
+}
+.app-navbar .nav-links a {
+  color: var(--nav-text);
+}
+.app-navbar .nav-links a:hover {
+  color: var(--nav-accent);
+}
+
 /* Navbar base styles unified via .app-navbar */
 .app-navbar {
   position: sticky;

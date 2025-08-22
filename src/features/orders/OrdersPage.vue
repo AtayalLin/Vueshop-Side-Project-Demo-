@@ -23,9 +23,15 @@
         <div class="items">
           <h4>訂單內容</h4>
           <ul>
-            <li v-for="it in o.items || []" :key="it.id">
-              <span class="name">{{ it.name }}</span>
-              <span class="meta">{{ it.price }} 元 × {{ it.quantity }}</span>
+            <li v-for="it in o.items || []" :key="it.id" class="order-item">
+              <div class="thumb" v-if="resolveImage(it)">
+                <img :src="resolveImage(it)" alt="" />
+              </div>
+              <div v-else class="emoji">{{ it.emoji }}</div>
+              <div class="info">
+                <span class="name">{{ it.name }}</span>
+                <span class="meta">{{ it.price }} 元 × {{ it.quantity }}</span>
+              </div>
             </li>
           </ul>
         </div>
@@ -46,6 +52,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { listOrders, removeOrder } from "@/services/ordersService";
+import { productImages } from "@/data/productImages";
 
 const orders = ref([]);
 const toastMsg = ref("");
@@ -68,6 +75,22 @@ function showToast(msg) {
 }
 
 const formatDate = (ts) => new Date(ts).toLocaleString();
+
+function resolveImage(item) {
+  const name = (item?.name || "").toLowerCase();
+  const base = "/images/products";
+  if (name.includes("茶壺") || name.includes("teapot"))
+    return `${base}/${productImages.teapot}-640.webp`;
+  if (name.includes("茶杯") || name.includes("teacup"))
+    return `${base}/${productImages.teacup}-640.webp`;
+  if (name.includes("便當") || name.includes("bento"))
+    return `${base}/${productImages.bento}-640.webp`;
+  if (name.includes("筷") || name.includes("chopstick"))
+    return `${base}/${productImages.chopsticks}-640.webp`;
+  if (name.includes("燈籠") || name.includes("lantern"))
+    return `${base}/${productImages.lantern}-640.webp`;
+  return "";
+}
 </script>
 <style scoped>
 .orders-page {
@@ -112,9 +135,20 @@ const formatDate = (ts) => new Date(ts).toLocaleString();
 }
 .items li {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
   font-size: 0.95rem;
+}
+.order-item .thumb img {
+  width: 72px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+.order-item .emoji {
+  font-size: 1.5rem;
 }
 .items .name {
   font-weight: 600;

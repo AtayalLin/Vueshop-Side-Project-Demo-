@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onUnmounted, computed } from "vue";
+import { ref, watch, onUnmounted, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
@@ -13,6 +13,15 @@ const cartStore = useCartStore();
 const cartCount = computed(() =>
   (cartStore.cartItems || []).reduce((n, it) => n + (it.quantity || 0), 0)
 );
+
+// theme switching (Wabi default)
+const theme = ref(localStorage.getItem("theme") || "wabi");
+const applyTheme = (t) => {
+  document.body.setAttribute("data-theme", t);
+  localStorage.setItem("theme", t);
+};
+watch(theme, (t) => applyTheme(t));
+onMounted(() => applyTheme(theme.value));
 
 const isDrawerOpen = ref(false);
 const toggleDrawer = () => (isDrawerOpen.value = !isDrawerOpen.value);
@@ -78,6 +87,13 @@ onUnmounted(() => enableScroll());
         <router-link to="/cart" class="cart-link">
           🛒<span v-if="cartCount" class="badge">{{ cartCount }}</span>
         </router-link>
+      </li>
+      <li class="theme-switcher">
+        <select v-model="theme" aria-label="切換主題">
+          <option value="wabi">Wabi（暖米色）</option>
+          <option value="neon">Neon（夜間霓虹）</option>
+          <option value="washi">Washi（和紙）</option>
+        </select>
       </li>
     </ul>
 
