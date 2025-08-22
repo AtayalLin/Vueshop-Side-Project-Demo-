@@ -12,7 +12,8 @@ import "vue-toastification/dist/index.css";
 
 const app = createApp(App);
 
-AOS.init();
+AOS.init({ duration: 700, easing: "ease-out-cubic", once: true });
+router.afterEach(() => setTimeout(() => AOS.refresh(), 0));
 
 app.use(createPinia()); // ✅ 註冊 Pinia
 app.use(router);

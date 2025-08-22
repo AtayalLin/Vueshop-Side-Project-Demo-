@@ -1,9 +1,17 @@
 <template>
   <div class="product-page">
-    <HeroSection name="alley">
-      <template #title>商品一覽</template>
-      <template #subtitle>夜色下的街巷與職人的器物，更顯日常的溫度。</template>
-    </HeroSection>
+    <div data-aos="fade">
+      <HeroSection name="alley">
+        <template #title>
+          <h2 data-aos="fade-up">商品一覽</h2>
+        </template>
+        <template #subtitle>
+          <p data-aos="fade-up" data-aos-delay="100">
+            夜色下的街巷與職人的器物，更顯日常的溫度。
+          </p>
+        </template>
+      </HeroSection>
+    </div>
 
     <div class="toolbar" data-aos="fade-up" data-aos-delay="50">
       <input v-model="keyword" class="input" placeholder="搜尋商品名稱…" />
