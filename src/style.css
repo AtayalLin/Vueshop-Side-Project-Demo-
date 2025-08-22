@@ -196,21 +196,24 @@ p {
   --nav-accent: #d4a373;
   --nav-border: #e5e7eb;
   --nav-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --nav-hover-bg: rgba(0, 0, 0, 0.04);
 }
 /* Neon */
 [data-theme="neon"] {
-  --nav-bg: rgba(11, 18, 32, 0.85);
+  --nav-bg: rgba(11, 18, 32, 0.92);
   --nav-text: #f9fafb;
   --nav-muted: #cbd5e1;
   --nav-accent: #3ee0d0;
   --nav-border: #223048;
   --nav-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --nav-hover-bg: rgba(255, 255, 255, 0.1);
 }
 /* Washi */
 [data-theme="washi"] {
   --nav-bg: rgba(255, 255, 255, 0.95);
   --nav-text: #1b1f24;
   --nav-muted: #4b5563;
+  --nav-hover-bg: #fafafa;
   --nav-accent: #2f8f74;
   --nav-border: #e6e6e6;
   --nav-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
@@ -242,6 +245,25 @@ p {
 }
 .app-navbar .nav-links a:hover {
   color: var(--nav-accent);
+  background: var(--nav-hover-bg);
+}
+
+/* Single "主題切換" button */
+.theme-toggle {
+  appearance: none;
+  border: 1px solid var(--nav-border);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: var(--nav-accent);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
 
 /* Theme switcher buttons */

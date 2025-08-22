@@ -22,6 +22,11 @@ const applyTheme = (t) => {
 };
 watch(theme, (t) => applyTheme(t));
 onMounted(() => applyTheme(theme.value));
+const themes = ["wabi", "neon", "washi"];
+const cycleTheme = () => {
+  const i = themes.indexOf(theme.value);
+  theme.value = themes[(i + 1) % themes.length];
+};
 
 const isDrawerOpen = ref(false);
 const toggleDrawer = () => (isDrawerOpen.value = !isDrawerOpen.value);
@@ -89,32 +94,9 @@ onUnmounted(() => enableScroll());
         </router-link>
       </li>
       <li class="theme-switcher">
-        <div class="theme-buttons" role="group" aria-label="切換主題">
-          <button
-            type="button"
-            class="theme-btn"
-            :class="{ active: theme === 'wabi' }"
-            @click="theme = 'wabi'"
-          >
-            Wabi
-          </button>
-          <button
-            type="button"
-            class="theme-btn"
-            :class="{ active: theme === 'neon' }"
-            @click="theme = 'neon'"
-          >
-            Neon
-          </button>
-          <button
-            type="button"
-            class="theme-btn"
-            :class="{ active: theme === 'washi' }"
-            @click="theme = 'washi'"
-          >
-            Washi
-          </button>
-        </div>
+        <button type="button" class="theme-toggle" @click="cycleTheme">
+          主題切換
+        </button>
       </li>
     </ul>
 
@@ -182,7 +164,7 @@ onUnmounted(() => enableScroll());
 
 <style scoped>
 .app-navbar {
-  box-sizing: borrgb(145, 18, 18);
+  box-sizing: border-box;
   position: sticky;
   top: 0;
   z-index: 200;
