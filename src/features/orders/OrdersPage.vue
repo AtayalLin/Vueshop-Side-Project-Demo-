@@ -81,7 +81,12 @@ function resolveImage(item) {
   const base = "/images/products";
   if (name.includes("茶壺") || name.includes("teapot"))
     return `${base}/${productImages.teapot}-640.webp`;
-  if (name.includes("茶杯") || name.includes("teacup"))
+  if (
+    name.includes("茶杯") ||
+    name.includes("杯子") ||
+    name.includes("杯") ||
+    name.includes("teacup")
+  )
     return `${base}/${productImages.teacup}-640.webp`;
   if (name.includes("便當") || name.includes("bento"))
     return `${base}/${productImages.bento}-640.webp`;

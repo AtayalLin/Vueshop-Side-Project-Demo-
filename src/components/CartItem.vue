@@ -45,7 +45,12 @@ const key = computed(() => (props.product?.name || "").toLowerCase());
 const imgBase = computed(() => {
   if (key.value.includes("茶壺") || key.value.includes("teapot"))
     return productImages.teapot;
-  if (key.value.includes("茶杯") || key.value.includes("teacup"))
+  if (
+    key.value.includes("茶杯") ||
+    key.value.includes("杯子") ||
+    key.value.includes("杯") ||
+    key.value.includes("teacup")
+  )
     return productImages.teacup;
   if (key.value.includes("便當") || key.value.includes("bento"))
     return productImages.bento;
