@@ -194,7 +194,10 @@ onUnmounted(() => enableScroll());
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
-  color: #1f2937;
+  color: var(--nav-text);
+}
+.nav-logo a:hover {
+  color: var(--nav-accent);
 }
 .nav-links {
   display: flex;
@@ -206,7 +209,7 @@ onUnmounted(() => enableScroll());
 }
 .nav-links a {
   text-decoration: none;
-  color: #1f2937;
+  color: var(--nav-text);
   font-weight: 600;
   padding: 10px 12px;
   border-radius: 8px;
@@ -215,8 +218,8 @@ onUnmounted(() => enableScroll());
     color 0.2s ease;
 }
 .nav-links a:hover {
-  color: #a0522d;
-  background: #f3f4f6;
+  color: var(--nav-accent);
+  background: var(--nav-hover-bg);
   transform: translateY(-1px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
 }
