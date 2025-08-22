@@ -28,11 +28,7 @@ const handleAddToCart = () => {
       return;
     }
     cart.addToCart(props.product);
-    toast.success(`✅ 商品「${props.product.name}」已加入購物車`, {
-      timeout: 3000,
-      position: "top-right",
-    });
-    console.log("加入購物車成功", props.product);
+    toast.success(`✅ 商品「${props.product.name}」已加入購物車`);
   } catch (err) {
     toast.error("加入購物車失敗");
     console.error("加入購物車錯誤:", err);

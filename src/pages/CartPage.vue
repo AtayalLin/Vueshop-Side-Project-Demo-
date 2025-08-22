@@ -4,10 +4,10 @@
 
     <p v-if="cartItems.length === 0">目前購物車是空的。</p>
 
-    <div v-else class="cart-items">
+    <div v-else class="cart-container">
       <div class="cart-content">
         <!-- 商品清單 -->
-        <div class="cart-items">
+        <div class="cart-list">
           <CartItem
             v-for="item in cartItems"
             :key="item.id"
@@ -59,7 +59,10 @@ const total = computed(() =>
 const checkout = () => {
   if (cart.cartItems.length === 0) {
     if (confirm("購物車是空的，前往商品頁逛逛？")) {
-      window.location.href = "/products";
+      // 保持 SPA 體驗
+      window.history.pushState({}, "", "/products");
+      const navEvent = new PopStateEvent("popstate");
+      dispatchEvent(navEvent);
     }
     return;
   }
@@ -92,10 +95,7 @@ const checkout = () => {
   font-size: 2rem;
 }
 
-.cart-page {
-  padding: 2rem;
-}
-
+/* 主容器 */
 .cart-content {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -103,7 +103,7 @@ const checkout = () => {
   margin-top: 2rem;
 }
 
-.cart-items {
+.cart-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;

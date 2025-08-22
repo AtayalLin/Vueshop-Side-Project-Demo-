@@ -73,26 +73,12 @@ const filteredSorted = computed(() => {
   return arr;
 });
 
-const getAosType = (index) => {
-  const pattern = [
-    "fade-zoom-in",
-    "fade-zoom-in",
-    "fade-zoom-in",
-    "fade-zoom-in",
-  ];
-  return pattern[index % 4];
-};
+const getAosType = () => "fade-zoom-in";
 
 onMounted(() => {
   products.value = listProducts();
   // 模擬極短載入延遲以顯示 skeleton
   setTimeout(() => (loading.value = false), 200);
-  AOS.init({
-    duration: 600,
-    easing: "ease-in-out",
-    once: false,
-    mirror: true, // 滑上滑下都會觸發動畫
-  });
 });
 </script>
 
