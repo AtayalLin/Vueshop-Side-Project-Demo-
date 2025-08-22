@@ -1,6 +1,9 @@
 <template>
   <div class="product-page">
-    <h2 data-aos="fade-down">商品一覽</h2>
+    <HeroSection name="alley">
+      <template #title>商品一覽</template>
+      <template #subtitle>夜色下的街巷與職人的器物，更顯日常的溫度。</template>
+    </HeroSection>
 
     <div class="toolbar" data-aos="fade-up" data-aos-delay="50">
       <input v-model="keyword" class="input" placeholder="搜尋商品名稱…" />
@@ -43,9 +46,8 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 import ProductCard from "../components/ProductCard.vue";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import "../assets/aos-custom.css";
+import HeroSection from "@/components/HeroSection.vue";
 
 import { listProducts } from "@/services/productsService";
 const products = ref([]);

@@ -1,0 +1,27 @@
+{
+  "_note": "Record image sources even if attribution not required. Fields: use, author, url, source, downloaded",
+  "examples": [
+    {
+      "use": "hero-dotonbori",
+      "author": "Pexels Photographer",
+      "url": "https://www.pexels.com/photo/vibrant-nightlife-scene-in-osaka-s-dotonbori-district-31851458/",
+      "source": "Pexels",
+      "downloaded": "2025-08-22"
+    },
+    {
+      "use": "hero-alley",
+      "author": "Pexels Photographer",
+      "url": "https://www.pexels.com/photo/neon-lit-alleyway-in-dotonbori-osaka-at-night-31267497/",
+      "source": "Pexels",
+      "downloaded": "2025-08-22"
+    },
+    {
+      "use": "product-teacup-1",
+      "author": "Unsplash Photographer",
+      "url": "https://unsplash.com/s/photos/japanese-tea",
+      "source": "Unsplash",
+      "downloaded": "2025-08-22"
+    }
+  ]
+}
+
