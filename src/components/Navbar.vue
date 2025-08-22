@@ -89,11 +89,32 @@ onUnmounted(() => enableScroll());
         </router-link>
       </li>
       <li class="theme-switcher">
-        <select v-model="theme" aria-label="切換主題">
-          <option value="wabi">Wabi（暖米色）</option>
-          <option value="neon">Neon（夜間霓虹）</option>
-          <option value="washi">Washi（和紙）</option>
-        </select>
+        <div class="theme-buttons" role="group" aria-label="切換主題">
+          <button
+            type="button"
+            class="theme-btn"
+            :class="{ active: theme === 'wabi' }"
+            @click="theme = 'wabi'"
+          >
+            Wabi
+          </button>
+          <button
+            type="button"
+            class="theme-btn"
+            :class="{ active: theme === 'neon' }"
+            @click="theme = 'neon'"
+          >
+            Neon
+          </button>
+          <button
+            type="button"
+            class="theme-btn"
+            :class="{ active: theme === 'washi' }"
+            @click="theme = 'washi'"
+          >
+            Washi
+          </button>
+        </div>
       </li>
     </ul>
 
@@ -161,7 +182,7 @@ onUnmounted(() => enableScroll());
 
 <style scoped>
 .app-navbar {
-  box-sizing: border-box;
+  box-sizing: borrgb(145, 18, 18);
   position: sticky;
   top: 0;
   z-index: 200;

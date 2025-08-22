@@ -216,6 +216,20 @@ p {
   --nav-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
 }
 
+/* Font pairing per theme (applied to navbar only to avoid global jump) */
+.app-navbar {
+  font-family: var(--nav-font, var(--font-main));
+}
+[data-theme="wabi"] {
+  --nav-font: "Noto Sans TC", system-ui, sans-serif;
+}
+[data-theme="neon"] {
+  --nav-font: "Noto Sans TC", system-ui, sans-serif;
+}
+[data-theme="washi"] {
+  --nav-font: "Noto Sans TC", system-ui, sans-serif;
+}
+
 /* Use variables for navbar */
 .app-navbar {
   background: var(--nav-bg);
@@ -228,6 +242,39 @@ p {
 }
 .app-navbar .nav-links a:hover {
   color: var(--nav-accent);
+}
+
+/* Theme switcher buttons */
+.theme-switcher {
+  display: flex;
+  align-items: center;
+}
+.theme-buttons {
+  display: flex;
+  gap: 8px;
+}
+.theme-btn {
+  appearance: none;
+  border: 1px solid var(--nav-border);
+  background: transparent;
+  color: var(--nav-text);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+.theme-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+.theme-btn.active {
+  background: var(--nav-accent);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
 /* Navbar base styles unified via .app-navbar */
