@@ -116,49 +116,37 @@ onUnmounted(() => enableScroll());
         </button>
         <ul class="popover-links">
           <li>
-            <router-link to="/" @click.native="closeDrawer">回首頁</router-link>
+            <router-link to="/" @click="closeDrawer">回首頁</router-link>
           </li>
           <li>
-            <router-link to="/products" @click.native="closeDrawer"
-              >商品</router-link
-            >
+            <router-link to="/products" @click="closeDrawer">商品</router-link>
           </li>
           <li>
-            <router-link to="/gallery" @click.native="closeDrawer"
-              >相簿</router-link
-            >
+            <router-link to="/gallery" @click="closeDrawer">相簿</router-link>
           </li>
           <li v-if="!user || !user.email">
-            <router-link to="/login" @click.native="closeDrawer"
-              >登入會員</router-link
-            >
+            <router-link to="/login" @click="closeDrawer">登入會員</router-link>
           </li>
           <li v-if="!user || !user.email">
-            <router-link to="/register" @click.native="closeDrawer"
+            <router-link to="/register" @click="closeDrawer"
               >註冊成為會員</router-link
             >
           </li>
           <li>
-            <router-link to="/member" @click.native="closeDrawer"
+            <router-link to="/member" @click="closeDrawer"
               >會員中心</router-link
             >
           </li>
           <li v-if="user && user.email">
-            <router-link to="/orders" @click.native="closeDrawer"
-              >訂單</router-link
-            >
+            <router-link to="/orders" @click="closeDrawer">訂單</router-link>
           </li>
           <li v-if="user && user.email">
-            <router-link to="/profile" @click.native="closeDrawer">{{
+            <router-link to="/profile" @click="closeDrawer">{{
               user.nickname || "個人資料"
             }}</router-link>
           </li>
           <li>
-            <router-link
-              to="/cart"
-              @click.native="closeDrawer"
-              class="cart-link"
-            >
+            <router-link to="/cart" @click="closeDrawer" class="cart-link">
               🛒 購物車
               <span v-if="cartCount" class="badge">{{ cartCount }}</span>
             </router-link>
