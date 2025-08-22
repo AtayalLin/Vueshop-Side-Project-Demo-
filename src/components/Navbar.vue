@@ -175,9 +175,11 @@ onUnmounted(() => enableScroll());
   padding-left: clamp(16px, 2vw, 28px);
   padding-right: 12px; /* 固定右側內距，避免因滾動條寬度造成的位移 */
   padding-block: 15px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  background-color: var(--nav-bg);
+  border-bottom: 1px solid var(--nav-border);
+  box-shadow: var(--nav-shadow);
+  color: var(--nav-text);
+  transition: background-color 0.25s ease, color 0.2s ease, box-shadow 0.2s ease;
   overflow-x: hidden;
 }
 .hamburger {
