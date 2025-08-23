@@ -33,7 +33,7 @@ const props = defineProps({
   delay: { type: Number, default: 0 },
 });
 
-const imgDir = "/images/products";
+const imgDir = `${import.meta.env.BASE_URL}images/products`;
 const key = computed(() => (props.product?.name || "").toLowerCase());
 const imgBase = computed(() => {
   if (

@@ -78,7 +78,7 @@ const formatDate = (ts) => new Date(ts).toLocaleString();
 
 function resolveImage(item) {
   const name = (item?.name || "").toLowerCase();
-  const base = "/images/products";
+  const base = `${import.meta.env.BASE_URL}images/products`;
   if (name.includes("茶壺") || name.includes("teapot"))
     return `${base}/${productImages.teapot}-640.webp`;
   if (
