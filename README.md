@@ -1,3 +1,52 @@
+# 日式電商 Demo（專案概覽與近期更新）
+
+- 線上網站（GitHub Pages）：https://atayallin.github.io/Vueshop-Side-Project-Demo-/
+- 技術棧：Vue 3 + Vite + Pinia + Vue Router + AOS + GitHub Actions
+
+## 近期更新
+
+- 單一「主題切換」按鈕：依序循環 Wabi → Neon → Washi，選擇會記錄在 localStorage
+- 三款主題改為深色系並完整套用到導覽列：背景、文字、按鈕、hover、Logo 文字都會隨主題切換
+- AOS 動畫：首頁與商品頁的 Hero 背景、標題（title）、副標（subtitle）加入 fade / fade-up 動畫；切換路由時自動 refresh 確保觸發
+- 圖片資產：public/images/ 下完整保留（hero 與 products），修正「日式風格杯子」圖片對應
+- 部署：push 到 main 由 GitHub Actions 自動建置並部署到 Pages；vite.config.js 透過 BASE_PATH 自動判斷子路徑
+
+## 快速開始
+
+```bash
+npm ci
+npm run dev   # http://localhost:5173/
+# 或
+npm run build && npm run preview
+```
+
+## 主題切換說明
+
+- 右上角只有一顆「主題切換」按鈕，每按一次循環切換主題
+- 三種深色主題（摘要）：
+  - Wabi（暖茶褐深色）：--nav-bg: rgba(42,37,32,.94), --nav-accent: #D4A373
+  - Neon（深夜霓虹）：--nav-bg: rgba(10,14,22,.96), --nav-accent: #3EE0D0
+  - Washi（墨綠灰深色）：--nav-bg: rgba(26,34,32,.94), --nav-accent: #6AB79A
+- Navbar 與 Logo 文字、連結 hover 會隨主題自動換色
+
+## 圖片與資產
+
+- 路徑：public/images/
+  - hero：public/images/hero/
+  - 商品：public/images/products/
+- 商品圖片對應：CartItem.vue、OrdersPage.vue 會依商品名稱關鍵字選擇圖檔
+  - 例如「日式風格杯子」→ teacup-1（關鍵字包含：茶杯/杯子/杯/teacup）
+- 版權與來源：public/images/credits.json
+
+## 部署到 GitHub Pages
+
+- Workflow：.github/workflows/deploy.yml（push 到 main 自動部署）
+- base 設定：vite.config.js 以環境變數 BASE_PATH 自動設定
+  - 專案子路徑（USERNAME.github.io/REPO/）會自動使用 "/REPO/"
+  - 若發佈至使用者首頁（USERNAME.github.io）則使用 "/"
+
+---
+
 ## Analytics 可選配置（GA4 / Sentry）
 
 本專案預設不啟用分析與錯誤回報；只有在設定環境變數時才會載入：
