@@ -8,18 +8,10 @@
       />
       <img
         :src="`${imgDir}/${imgBase}-640.webp`"
-<<<<<<< HEAD
-        :alt="props.product.name"
-        class="thumb"
-        loading="lazy"
-        decoding="async"
-        @error="handleImageError"
-=======
         alt=""
         class="thumb"
         loading="lazy"
         decoding="async"
->>>>>>> e9c6f28 (重新上傳)
       />
     </picture>
     <div v-else class="emoji">{{ props.product.emoji }}</div>
@@ -41,41 +33,6 @@ const props = defineProps({
   delay: { type: Number, default: 0 },
 });
 
-<<<<<<< HEAD
-const imgDir = "/images/products";
-const key = computed(() => (props.product?.name || "").toLowerCase());
-const imgBase = computed(() => {
-  const productName = key.value;
-  console.log("圖片映射檢查:", { productName });
-
-  // 茶壺
-  if (productName.includes("手工茶壺")) {
-    return productImages.teapot;
-  }
-
-  // 茶杯
-  if (productName.includes("日式風格杯子")) {
-    return productImages.teacup;
-  }
-
-  // 便當
-  if (productName.includes("日式便當盒")) {
-    return productImages.bento;
-  }
-
-  // 筷子
-  if (productName.includes("竹製筷子組")) {
-    return productImages.chopsticks;
-  }
-
-  // 燈籠
-  if (productName.includes("和風燈籠")) {
-    return productImages.lantern;
-  }
-
-  // 如果沒有符合的圖片，記錄並返回空字串
-  console.log("無對應圖片:", productName);
-=======
 const imgDir = `${import.meta.env.BASE_URL}images/products`;
 const key = computed(() => (props.product?.name || "").toLowerCase());
 const imgBase = computed(() => {
@@ -105,33 +62,12 @@ const imgBase = computed(() => {
     key.value.includes("lantern")
   )
     return productImages.lantern;
->>>>>>> e9c6f28 (重新上傳)
   return "";
 });
 
 const cart = useCartStore();
 const toast = useToast();
 
-<<<<<<< HEAD
-const handleImageError = (e) => {
-  // 圖片載入失敗時，記錄詳細信息
-  console.error("圖片載入失敗:", {
-    src: e.target.src,
-    productName: props.product.name,
-    imgBase: imgBase.value,
-    key: key.value,
-  });
-
-  // 移除圖片元素，顯示 emoji
-  e.target.style.display = "none";
-  const emojiDiv = document.createElement("div");
-  emojiDiv.className = "emoji";
-  emojiDiv.textContent = props.product.emoji;
-  e.target.parentNode.appendChild(emojiDiv);
-};
-
-=======
->>>>>>> e9c6f28 (重新上傳)
 const handleAddToCart = () => {
   try {
     if (!props.product || !props.product.id) {
