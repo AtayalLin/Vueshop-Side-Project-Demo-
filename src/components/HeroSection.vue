@@ -35,7 +35,11 @@ const props = defineProps({
   name: { type: String, default: "dotonbori" }, // 用於組圖檔名
   variant: { type: String, default: "default" },
 });
+<<<<<<< HEAD
 const base = "/images/hero";
+=======
+const base = `${import.meta.env.BASE_URL}images/hero`;
+>>>>>>> e9c6f28 (重新上傳)
 </script>
 <style scoped>
 .hero {

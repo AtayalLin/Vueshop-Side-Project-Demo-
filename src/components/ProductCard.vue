@@ -8,11 +8,18 @@
       />
       <img
         :src="`${imgDir}/${imgBase}-640.webp`"
+<<<<<<< HEAD
         :alt="props.product.name"
         class="thumb"
         loading="lazy"
         decoding="async"
         @error="handleImageError"
+=======
+        alt=""
+        class="thumb"
+        loading="lazy"
+        decoding="async"
+>>>>>>> e9c6f28 (重新上傳)
       />
     </picture>
     <div v-else class="emoji">{{ props.product.emoji }}</div>
@@ -34,6 +41,7 @@ const props = defineProps({
   delay: { type: Number, default: 0 },
 });
 
+<<<<<<< HEAD
 const imgDir = "/images/products";
 const key = computed(() => (props.product?.name || "").toLowerCase());
 const imgBase = computed(() => {
@@ -67,12 +75,44 @@ const imgBase = computed(() => {
 
   // 如果沒有符合的圖片，記錄並返回空字串
   console.log("無對應圖片:", productName);
+=======
+const imgDir = `${import.meta.env.BASE_URL}images/products`;
+const key = computed(() => (props.product?.name || "").toLowerCase());
+const imgBase = computed(() => {
+  if (
+    key.value.includes("茶壺") ||
+    key.value.includes("茶壶") ||
+    key.value.includes("teapot")
+  )
+    return productImages.teapot;
+  if (
+    key.value.includes("茶杯") ||
+    key.value.includes("杯") ||
+    key.value.includes("teacup")
+  )
+    return productImages.teacup;
+  if (
+    key.value.includes("便當") ||
+    key.value.includes("便当") ||
+    key.value.includes("bento")
+  )
+    return productImages.bento;
+  if (key.value.includes("筷") || key.value.includes("chopstick"))
+    return productImages.chopsticks;
+  if (
+    key.value.includes("燈籠") ||
+    key.value.includes("灯笼") ||
+    key.value.includes("lantern")
+  )
+    return productImages.lantern;
+>>>>>>> e9c6f28 (重新上傳)
   return "";
 });
 
 const cart = useCartStore();
 const toast = useToast();
 
+<<<<<<< HEAD
 const handleImageError = (e) => {
   // 圖片載入失敗時，記錄詳細信息
   console.error("圖片載入失敗:", {
@@ -90,6 +130,8 @@ const handleImageError = (e) => {
   e.target.parentNode.appendChild(emojiDiv);
 };
 
+=======
+>>>>>>> e9c6f28 (重新上傳)
 const handleAddToCart = () => {
   try {
     if (!props.product || !props.product.id) {
