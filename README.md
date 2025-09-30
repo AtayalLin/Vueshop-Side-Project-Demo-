@@ -5,6 +5,7 @@
 
 ## 近期更新
 
+- 重新上傳
 - 單一「主題切換」按鈕：依序循環 Wabi → Neon → Washi，選擇會記錄在 localStorage
 - 三款主題改為深色系並完整套用到導覽列：背景、文字、按鈕、hover、Logo 文字都會隨主題切換
 - AOS 動畫：首頁與商品頁的 Hero 背景、標題（title）、副標（subtitle）加入 fade / fade-up 動畫；切換路由時自動 refresh 確保觸發
