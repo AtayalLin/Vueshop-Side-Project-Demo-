@@ -35,7 +35,7 @@ const props = defineProps({
   name: { type: String, default: "dotonbori" }, // 用於組圖檔名
   variant: { type: String, default: "default" },
 });
-const base = `${import.meta.env.BASE_URL}images/hero`;
+const base = "/images/hero";
 </script>
 <style scoped>
 .hero {
