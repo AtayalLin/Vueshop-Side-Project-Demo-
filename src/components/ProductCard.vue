@@ -34,35 +34,39 @@ const props = defineProps({
   delay: { type: Number, default: 0 },
 });
 
-const imgDir = `${import.meta.env.BASE_URL || "/"}images/products`;
+const imgDir = "/images/products";
 const key = computed(() => (props.product?.name || "").toLowerCase());
 const imgBase = computed(() => {
-  if (
-    key.value.includes("茶壺") ||
-    key.value.includes("茶壶") ||
-    key.value.includes("teapot")
-  )
+  const productName = key.value;
+  console.log("圖片映射檢查:", { productName });
+
+  // 茶壺
+  if (productName.includes("手工茶壺")) {
     return productImages.teapot;
-  if (
-    key.value.includes("茶杯") ||
-    key.value.includes("杯") ||
-    key.value.includes("teacup")
-  )
+  }
+
+  // 茶杯
+  if (productName.includes("日式風格杯子")) {
     return productImages.teacup;
-  if (
-    key.value.includes("便當") ||
-    key.value.includes("便当") ||
-    key.value.includes("bento")
-  )
+  }
+
+  // 便當
+  if (productName.includes("日式便當盒")) {
     return productImages.bento;
-  if (key.value.includes("筷") || key.value.includes("chopstick"))
+  }
+
+  // 筷子
+  if (productName.includes("竹製筷子組")) {
     return productImages.chopsticks;
-  if (
-    key.value.includes("燈籠") ||
-    key.value.includes("灯笼") ||
-    key.value.includes("lantern")
-  )
+  }
+
+  // 燈籠
+  if (productName.includes("和風燈籠")) {
     return productImages.lantern;
+  }
+
+  // 如果沒有符合的圖片，記錄並返回空字串
+  console.log("無對應圖片:", productName);
   return "";
 });
 
@@ -70,7 +74,15 @@ const cart = useCartStore();
 const toast = useToast();
 
 const handleImageError = (e) => {
-  // 圖片載入失敗時，移除圖片元素，顯示 emoji
+  // 圖片載入失敗時，記錄詳細信息
+  console.error("圖片載入失敗:", {
+    src: e.target.src,
+    productName: props.product.name,
+    imgBase: imgBase.value,
+    key: key.value,
+  });
+
+  // 移除圖片元素，顯示 emoji
   e.target.style.display = "none";
   const emojiDiv = document.createElement("div");
   emojiDiv.className = "emoji";
