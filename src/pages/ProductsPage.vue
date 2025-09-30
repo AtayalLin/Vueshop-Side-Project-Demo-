@@ -65,6 +65,10 @@ const keyword = ref("");
 const sortBy = ref("name-asc");
 
 const filteredSorted = computed(() => {
+  if (!Array.isArray(products.value)) {
+    console.error("products 不是陣列:", products.value);
+    return [];
+  }
   const k = keyword.value.trim().toLowerCase();
   const arr = products.value.filter((p) => p.name.toLowerCase().includes(k));
   switch (sortBy.value) {
@@ -86,9 +90,19 @@ const filteredSorted = computed(() => {
 const getAosType = () => "fade-zoom-in";
 
 onMounted(() => {
-  products.value = listProducts();
-  // 模擬極短載入延遲以顯示 skeleton
-  setTimeout(() => (loading.value = false), 200);
+  try {
+    const productList = listProducts();
+    console.log("載入的商品數據:", productList);
+    products.value = productList;
+    // 模擬極短載入延遲以顯示 skeleton
+    setTimeout(() => {
+      loading.value = false;
+      console.log("商品列表載入完成");
+    }, 200);
+  } catch (error) {
+    console.error("載入商品時發生錯誤:", error);
+    loading.value = false;
+  }
 });
 </script>
 

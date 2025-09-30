@@ -8,10 +8,11 @@
       />
       <img
         :src="`${imgDir}/${imgBase}-640.webp`"
-        alt=""
+        :alt="props.product.name"
         class="thumb"
         loading="lazy"
         decoding="async"
+        @error="handleImageError"
       />
     </picture>
     <div v-else class="emoji">{{ props.product.emoji }}</div>
@@ -33,7 +34,7 @@ const props = defineProps({
   delay: { type: Number, default: 0 },
 });
 
-const imgDir = `${import.meta.env.BASE_URL}images/products`;
+const imgDir = `${import.meta.env.BASE_URL || "/"}images/products`;
 const key = computed(() => (props.product?.name || "").toLowerCase());
 const imgBase = computed(() => {
   if (
@@ -67,6 +68,15 @@ const imgBase = computed(() => {
 
 const cart = useCartStore();
 const toast = useToast();
+
+const handleImageError = (e) => {
+  // 圖片載入失敗時，移除圖片元素，顯示 emoji
+  e.target.style.display = "none";
+  const emojiDiv = document.createElement("div");
+  emojiDiv.className = "emoji";
+  emojiDiv.textContent = props.product.emoji;
+  e.target.parentNode.appendChild(emojiDiv);
+};
 
 const handleAddToCart = () => {
   try {
