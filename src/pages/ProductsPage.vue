@@ -3,10 +3,10 @@
     <div data-aos="fade">
       <HeroSection name="alley">
         <template #title>
-          <h2 data-aos="fade-up">商品一覽</h2>
+          <h2 data-aos="fade-up" style="color: white;">商品一覽</h2>
         </template>
         <template #subtitle>
-          <p data-aos="fade-up" data-aos-delay="100">
+          <p data-aos="fade-up" data-aos-delay="100" style="color: white;">
             夜色下的街巷與職人的器物，更顯日常的溫度。
           </p>
         </template>

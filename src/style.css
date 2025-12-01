@@ -1,377 +1,448 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
-  /* App theme variables */
-  --bg-color: #faf7f2; /* 柔和米色背景 */
-  --primary-color: #d4a373; /* 茶色主色 */
-  --secondary-color: #8c7851; /* 深咖輔助色 */
-  --accent-color: #e07a5f; /* 溫暖橘紅點綴 */
-  --font-main: "Noto Sans TC", sans-serif;
+    /* App theme variables */
+    --bg-color: #faf7f2;
+    /* 柔和米色背景 */
+    --primary-color: #d4a373;
+    /* 茶色主色 */
+    --secondary-color: #8c7851;
+    /* 深咖輔助色 */
+    --accent-color: #e07a5f;
+    /* 溫暖橘紅點綴 */
+    --font-main: "Noto Sans TC", sans-serif;
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
 }
+
 a:hover {
-  color: #535bf2;
+    color: #535bf2;
 }
 
 body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: var(--bg-color);
-  font-family: var(--font-main);
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    font-family: var(--font-main);
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    justify-content: center;
+    /* 水平置中 */
+    align-items: center;
+    /* 垂直置中 */
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+    font-size: 3.2em;
+    line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+    border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+    outline: 4px auto -webkit-focus-ring-color;
 }
 
 .card {
-  padding: 2em;
+    padding: 2em;
 }
 
 #app {
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 0; /* 取消外圍多餘留白，讓 Navbar 能左右貼齊 */
-  text-align: initial;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    /* 取消外圍多餘留白，讓 Navbar 能左右貼齊 */
+    text-align: initial;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+    :root {
+        color: #213547;
+        background-color: #ffffff;
+    }
 
-  /* --- Global RWD safety net --- */
-  html,
-  body {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-  img,
-  video {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-  :where(h1, h2, h3, h4, h5, h6, p, li, a, button) {
-    overflow-wrap: anywhere;
-  }
+    a:hover {
+        color: #747bff;
+    }
 
-  /* Container padding per breakpoint */
-  @media (max-width: 480px) {
-    .page-container {
-      padding-inline: 12px !important;
+    button {
+        background-color: #f9f9f9;
     }
-  }
-  @media (min-width: 600px) and (max-width: 767px) {
-    .page-container {
-      padding-inline: 16px !important;
+
+    /* --- Global RWD safety net --- */
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+
+
     }
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    .page-container {
-      padding-inline: 20px !important;
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
     }
-  }
+
+    img,
+    video {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    :where(h1, h2, h3, h4, h5, h6, p, li, a, button) {
+        overflow-wrap: anywhere;
+    }
+
+    /* Container padding per breakpoint */
+    @media (max-width: 480px) {
+        .page-container {
+            padding-inline: 12px !important;
+        }
+    }
+
+    @media (min-width: 600px) and (max-width: 767px) {
+        .page-container {
+            padding-inline: 16px !important;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .page-container {
+            padding-inline: 20px !important;
+        }
+    }
 }
 
 /* --- Fluid type scale for headings and body --- */
 :root {
-  --fz-h1: clamp(24px, 4.2vw, 40px);
-  --fz-h2: clamp(20px, 3.2vw, 28px);
-  --fz-body: clamp(14px, 1.6vw, 16px);
+    --fz-h1: clamp(24px, 4.2vw, 40px);
+    --fz-h2: clamp(20px, 3.2vw, 28px);
+    --fz-body: clamp(14px, 1.6vw, 16px);
 }
 
 h1 {
-  font-size: var(--fz-h1);
-  margin: 0.6em 0 0.4em;
-  line-height: 1.2;
-  text-align: center;
+    font-size: var(--fz-h1);
+    margin: 0.6em 0 0.4em;
+    line-height: 1.2;
+    text-align: center;
 }
+
 h2 {
-  font-size: var(--fz-h2);
-  margin: 0.8em 0 0.5em;
-  line-height: 1.3;
-  text-align: center;
+    font-size: var(--fz-h2);
+    margin: 0.8em 0 0.5em;
+    line-height: 1.3;
+    text-align: center;
 }
+
 p {
-  font-size: var(--fz-body);
-  line-height: 1.75;
+    font-size: var(--fz-body);
+    line-height: 1.75;
 }
 
 /* Center sections commonly used in pages */
 .page,
 .product-page,
 .cart-page {
-  max-width: 100%;
-  margin-inline: auto;
+    max-width: 100%;
+    margin-inline: auto;
 }
-.page > *,
-.product-page > *,
-.cart-page > * {
-  text-align: center;
+
+.page>*,
+.product-page>*,
+.cart-page>* {
+    text-align: center;
 }
 
 /* tighten on very small devices */
 @media (max-width: 360px) {
-  :root {
-    --fz-h1: clamp(22px, 5vw, 36px);
-    --fz-h2: clamp(18px, 4vw, 24px);
-  }
+    :root {
+        --fz-h1: clamp(22px, 5vw, 36px);
+        --fz-h2: clamp(18px, 4vw, 24px);
+    }
 }
 
 /* === Global UI utilities added === */
 .container {
-  width: 100%;
-  max-width: 1200px;
-  margin-inline: auto;
-  padding-inline: 16px;
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 16px;
 }
+
 .py-24 {
-  padding-block: 24px;
+    padding-block: 24px;
 }
+
 /* Wider container for nav/header sections (auto-scales with viewport) */
 .container-wide {
-  width: 100%;
-  max-width: clamp(1440px, 98vw, 1920px);
-  margin-inline: auto;
-  padding-inline: clamp(12px, 2vw, 24px);
+    width: 100%;
+    max-width: clamp(1440px, 98vw, 1920px);
+    margin-inline: auto;
+    padding-inline: clamp(12px, 2vw, 24px);
 }
 
 /* === Theme presets === */
 /* Default Wabi */
 [data-theme="wabi"] {
-  /* 深色暖米色（溫暖茶褐調） */
-  --nav-bg: rgba(42, 37, 32, 0.94); /* #2A2520 */
-  --nav-text: #f6f3ed;
-  --nav-muted: #d7d1c8;
-  --nav-accent: #d4a373;
-  --nav-border: #3a332b;
-  --nav-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
-  --nav-hover-bg: rgba(255, 255, 255, 0.08);
+    /* 深色暖米色（溫暖茶褐調） */
+    --nav-bg: rgba(42, 37, 32, 0.94);
+    /* #2A2520 */
+    --nav-text: #f6f3ed;
+    --nav-muted: #d7d1c8;
+    --nav-accent: #d4a373;
+    --nav-border: #3a332b;
+    --nav-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    --nav-hover-bg: rgba(255, 255, 255, 0.08);
 }
+
 /* Neon */
 [data-theme="neon"] {
-  /* 深色夜間霓虹（更高對比） */
-  --nav-bg: rgba(10, 14, 22, 0.96); /* #0A0E16 */
-  --nav-text: #f8fafc;
-  --nav-muted: #cbd5e1;
-  --nav-accent: #3ee0d0; /* 青綠霓虹 */
-  --nav-border: #1b2436;
-  --nav-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
-  --nav-hover-bg: rgba(255, 255, 255, 0.12);
+    /* 深色夜間霓虹（更高對比） */
+    --nav-bg: rgba(10, 14, 22, 0.96);
+    /* #0A0E16 */
+    --nav-text: #f8fafc;
+    --nav-muted: #cbd5e1;
+    --nav-accent: #3ee0d0;
+    /* 青綠霓虹 */
+    --nav-border: #1b2436;
+    --nav-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
+    --nav-hover-bg: rgba(255, 255, 255, 0.12);
 }
+
 /* Washi */
 [data-theme="washi"] {
-  /* 深色和紙極簡（墨綠灰調） */
-  --nav-bg: rgba(26, 34, 32, 0.94); /* #1A2220 */
-  --nav-text: #f1f5f9;
-  --nav-muted: #a7b3a9;
-  --nav-hover-bg: rgba(255, 255, 255, 0.08);
-  --nav-accent: #6ab79a; /* 松綠變體，避免過暗 */
-  --nav-border: #2b3a35;
-  --nav-shadow: 0 10px 28px rgba(0, 0, 0, 0.46);
+    /* 深色和紙極簡（墨綠灰調） */
+    --nav-bg: rgba(26, 34, 32, 0.94);
+    /* #1A2220 */
+    --nav-text: #f1f5f9;
+    --nav-muted: #a7b3a9;
+    --nav-hover-bg: rgba(255, 255, 255, 0.08);
+    --nav-accent: #6ab79a;
+    /* 松綠變體，避免過暗 */
+    --nav-border: #2b3a35;
+    --nav-shadow: 0 10px 28px rgba(0, 0, 0, 0.46);
 }
 
 /* Font pairing per theme (applied to navbar only to avoid global jump) */
 .app-navbar {
-  font-family: var(--nav-font, var(--font-main));
+    font-family: var(--nav-font, var(--font-main));
 }
+
 [data-theme="wabi"] {
-  --nav-font: "Noto Sans TC", system-ui, sans-serif;
+    --nav-font: "Noto Sans TC", system-ui, sans-serif;
 }
+
 [data-theme="neon"] {
-  --nav-font: "Noto Sans TC", system-ui, sans-serif;
+    --nav-font: "Noto Sans TC", system-ui, sans-serif;
 }
+
 [data-theme="washi"] {
-  --nav-font: "Noto Sans TC", system-ui, sans-serif;
+    --nav-font: "Noto Sans TC", system-ui, sans-serif;
 }
 
 /* Use variables for navbar */
 .app-navbar {
-  background: var(--nav-bg);
-  background-color: var(
-    --nav-bg
-  ); /* ensure explicit background-color changes with theme */
-  color: var(--nav-text);
-  border-bottom-color: var(--nav-border);
-  box-shadow: var(--nav-shadow);
-  transition: background-color 0.25s ease, color 0.2s ease, box-shadow 0.2s ease;
+    background: var(--nav-bg);
+    background-color: var(--nav-bg);
+    /* ensure explicit background-color changes with theme */
+    color: var(--nav-text);
+    border-bottom-color: var(--nav-border);
+    box-shadow: var(--nav-shadow);
+    transition: background-color 0.25s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
+
 .app-navbar .nav-links a {
-  color: var(--nav-text);
+    color: var(--nav-text);
 }
+
 .app-navbar .nav-links a:hover {
-  color: var(--nav-accent);
-  background: var(--nav-hover-bg);
+    color: var(--nav-accent);
+    background: var(--nav-hover-bg);
 }
 
 /* Single "主題切換" button */
 .theme-toggle {
-  appearance: none;
-  border: 1px solid var(--nav-border);
-  border-radius: 999px;
-  padding: 8px 12px;
-  background: var(--nav-accent);
-  color: #fff;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  transition: transform 0.15s ease, box-shadow 0.2s ease;
+    appearance: none;
+    border: 1px solid var(--nav-border);
+    border-radius: 999px;
+    padding: 8px 12px;
+    background: var(--nav-accent);
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
 }
+
 .theme-toggle:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
 
 /* Theme switcher buttons */
 .theme-switcher {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
+
 .theme-buttons {
-  display: flex;
-  gap: 8px;
+    display: flex;
+    gap: 8px;
 }
+
 .theme-btn {
-  appearance: none;
-  border: 1px solid var(--nav-border);
-  background: transparent;
-  color: var(--nav-text);
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease,
-    transform 0.15s ease;
+    appearance: none;
+    border: 1px solid var(--nav-border);
+    background: transparent;
+    color: var(--nav-text);
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease,
+        transform 0.15s ease;
 }
+
 .theme-btn:hover {
-  background: rgba(0, 0, 0, 0.05);
-  transform: translateY(-1px);
+    background: rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
 }
+
 .theme-btn.active {
-  background: var(--nav-accent);
-  color: #fff;
-  border-color: transparent;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    background: var(--nav-accent);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
 /* Navbar base styles unified via .app-navbar */
 .app-navbar {
-  position: sticky;
-  top: 0;
-  z-index: 200;
-  background: #ffffffcc; /* 稍透明，營造漂浮感 */
-  backdrop-filter: saturate(180%) blur(10px);
-  border-bottom: 1px solid #e5e7eb;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1); /* 加深陰影 */
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: #ffffffcc;
+    /* 稍透明，營造漂浮感 */
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+    /* 加深陰影 */
 }
+
 .app-navbar .navbar-inner {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  height: 72px; /* 較寬大 */
-  column-gap: 24px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    height: 72px;
+    /* 較寬大 */
+    column-gap: 24px;
 }
+
 .nav-logo a {
-  font-weight: 800;
-  color: #111827;
-  text-decoration: none;
+    font-weight: 800;
+    color: #111827;
+    text-decoration: none;
 }
+
 .nav-links {
-  display: flex;
-  align-items: center;
-  gap: 28px; /* 放大間距 */
-  padding-left: 0;
-  margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    /* 放大間距 */
+    padding-left: 0;
+    margin: 0;
 }
+
 .nav-link {
-  color: #111827;
-  text-decoration: none;
-  padding: 10px 12px; /* 點擊目標更大 */
-  border-radius: 8px;
-  transition: transform 0.15s ease, box-shadow 0.2s ease, color 0.2s ease,
-    background 0.2s ease;
+    color: #111827;
+    text-decoration: none;
+    padding: 10px 12px;
+    /* 點擊目標更大 */
+    border-radius: 8px;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, color 0.2s ease,
+        background 0.2s ease;
 }
+
 .nav-link:hover {
-  color: #2f8f74;
-  background: #f3f4f6; /* 淺灰更襯托陰影 */
-  transform: translateY(-1px); /* 微妙漂浮感 */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    color: #2f8f74;
+    background: #f3f4f6;
+    /* 淺灰更襯托陰影 */
+    transform: translateY(-1px);
+    /* 微妙漂浮感 */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Navbar three-zone layout helpers */
 .nav-left {
-  justify-self: start;
+    justify-self: start;
 }
+
 .nav-center {
-  justify-self: center;
+    justify-self: center;
 }
+
 .nav-right {
-  justify-self: end;
+    justify-self: end;
 }
 
 /* Prevent link wrapping and misalignment */
 .nav-links {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  flex-wrap: nowrap;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: nowrap;
 }
+
 .nav-links li {
-  display: inline-flex;
+    display: inline-flex;
 }
+
 .nav-link:active {
-  transform: translateY(0); /* 點擊回到原位 */
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transform: translateY(0);
+    /* 點擊回到原位 */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+h2,
+h3 {
+    color: #000;
+}
+
+p {
+    color: #000;
 }

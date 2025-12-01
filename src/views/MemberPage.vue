@@ -1,12 +1,12 @@
 <template>
   <div class="member-container" data-aos="fade-up">
-    <h1>會員中心</h1>
+    <h1 style="color: black;">會員中心</h1>
     <div v-if="authStore.token" class="member-info">
       <p><strong>暱稱：</strong>{{ user.nickname || "(未設定)" }}</p>
       <p><strong>Email：</strong>{{ user.email || "(未知)" }}</p>
       <button class="logout-btn" @click="handleLogout">登出</button>
     </div>
-    <div v-else class="member-info">
+    <div v-else class="member-info" >
       <button class="open-modal" @click="showModal = true">會員功能</button>
     </div>
 

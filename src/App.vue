@@ -31,13 +31,26 @@ onMounted(() => {
 }
 
 .page-container {
-  flex: 1;
+  /* flex: 1; */
   /* 更寬但仍保有安全邊界：1760px 上限，視窗 98vw 內縮 */
-  max-width: clamp(1280px, 98vw, 1760px);
-  padding-inline: clamp(8px, 1.5vw, 20px);
+  /* max-width: clamp(1760px, 98vw, 1760px); */
+  /* padding-inline: clamp(8px, 1.5vw, 20px); */
+  /* padding-block: 32px; */
+  /* margin-inline: auto; */
+  /* width: 100%;  */
+
+  /* 中央內容最大寬度（不含左右留白） */
+  /* max-width: 1760px; */
+  width: min(95vw, 100%);
+
+  /* 左右留白：固定 24px～48px 之間彈性 */
+  padding-inline: clamp(48px);
+
+  /* 上下留白 */
   padding-block: 32px;
+
+  /* 水平置中 */
   margin-inline: auto;
-  width: 100%;
 }
 
 body {
