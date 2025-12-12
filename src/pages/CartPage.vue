@@ -19,6 +19,7 @@
         <!-- 購買摘要 -->
         <div class="cart-summary">
           <h3>📝 購買清單</h3>
+
           <ul class="summary-list">
             <li v-for="item in cartItems" :key="item.id">
               <span>{{ item.name }}</span>
@@ -26,16 +27,20 @@
             </li>
           </ul>
 
-          <div class="total">
-            <p>
-              總金額：<strong>{{ total }} 元</strong>
-            </p>
-            <div class="actions">
-              <button class="checkout-btn" @click="checkout">前往結帳</button>
-              <router-link to="/checkout" class="checkout-btn alt"
-                >使用新版結帳</router-link
-              >
-            </div>
+          <!-- 總金額 -->
+          <div class="summary-total">
+            <p>總金額：<strong>{{ total }} 元</strong></p>
+          </div>
+
+          <!-- 新版排版的兩個結帳按鈕 -->
+          <div class="summary-actions">
+            <button class="btn primary" @click="checkout">
+             前往結帳
+            </button>
+
+            <router-link to="/checkout" class="btn secondary">
+            使用新版結帳
+            </router-link>
           </div>
         </div>
       </div>
@@ -71,31 +76,7 @@ const checkout = () => {
 </script>
 
 <style scoped>
-.cart-page {
-  padding: 2rem;
-  text-align: center;
-}
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-.product-card {
-  border: 1px solid #eaeaea;
-  border-radius: 8px;
-  padding: 1.5rem;
-  text-align: center;
-  transition: transform 0.3s;
-}
-.product-card:hover {
-  transform: translateY(-5px);
-}
-.emoji {
-  font-size: 2rem;
-}
-
-/* 主容器 */
+/* 整體排版同原本，不動動能 */
 .cart-content {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -103,13 +84,7 @@ const checkout = () => {
   margin-top: 2rem;
 }
 
-.cart-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* 購買摘要區塊 */
+/* 購買摘要卡片 */
 .cart-summary {
   background: #f9fafb;
   padding: 1.5rem;
@@ -136,38 +111,66 @@ const checkout = () => {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.5rem;
-  color: #444;
   font-size: 0.95rem;
+  color: #444;
 }
 
-.total {
-  margin-top: 1rem;
+.summary-total {
+  margin: 1rem 0;
+  font-size: 1rem;
 }
-.actions {
+
+/* === 新結帳按鈕統一樣式 === */
+.summary-actions {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
-.checkout-btn {
-  display: block; /* 保證佔滿整行 */
+
+/* 🔥 讓 button 和 router-link 完全一樣 */
+.btn,
+.btn:visited,
+.btn:link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 100%;
-  margin: 0;
-  padding: 0.75rem;
-  background-color: #111827;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  text-align: center;
+  padding: 0.9rem;
+  border-radius: 10px;
+
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  line-height: 1; /* 🔥 超重要：避免 router-link 內建行高 */
+
   cursor: pointer;
-  text-decoration: none; /* 移除 router-link 超連結底線 */
+  text-decoration: none;
+  border: none;
+
+  box-sizing: border-box; /* 🔥 防止不同元素呈現差異 */
 }
-.checkout-btn.alt {
-  background: #0b5;
+
+/* 主按鈕 */
+.btn.primary {
+  background: #0d1223;
+  color: white;
 }
-.checkout-btn:hover {
-  background-color: #374151;
+
+/* 次按鈕 */
+.btn.secondary {
+  background: #07c157;
+  color: white;
 }
+
+.btn.primary:hover {
+  background: #18203b;
+}
+
+.btn.secondary:hover {
+  background: #06a84c;
+}
+
 
 /* 響應式 */
 @media (max-width: 768px) {
@@ -175,4 +178,5 @@ const checkout = () => {
     grid-template-columns: 1fr;
   }
 }
+
 </style>

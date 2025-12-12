@@ -3,7 +3,7 @@
     <h2>我的訂單</h2>
     <p v-if="orders.length === 0" class="empty">目前尚無任何訂單。</p>
     <ul v-else class="list">
-      <li v-for="o in orders" :key="o.id" class="card" data-aos="fade-up">
+      <li v-for="o in orders" :key="o.id" class="card" data-aos="fade-up" style="color: black;">
         <div class="row">
           <strong>訂單編號</strong>
           <span>{{ o.id }}</span>
@@ -14,7 +14,7 @@
         </div>
         <div class="row">
           <span>品項數</span>
-          <span>{{ o.items?.length || 0 }}</span>
+          <span>{{ o.items?.length || 0 }} </span>
         </div>
         <div class="row">
           <span>金額</span>
@@ -29,7 +29,7 @@
               </div>
               <div v-else class="emoji">{{ it.emoji }}</div>
               <div class="info">
-                <span class="name">{{ it.name }}</span>
+                <span class="name">{{ it.name + " : "}} </span>
                 <span class="meta">{{ it.price }} 元 × {{ it.quantity }}</span>
               </div>
             </li>
