@@ -3,7 +3,7 @@
     <h2>結帳</h2>
 
     <div class="layout">
-      <section class="form-area">
+      <section class="form-area" style="color: black;">
         <h3>收件與付款資訊</h3>
         <Form
           :validation-schema="schema"
@@ -17,7 +17,7 @@
               <Field name="name" as="input" />
               <ErrorMessage name="name" class="err" />
             </label>
-            <label>
+            <label \>
               電話
               <Field name="phone" as="input" />
               <ErrorMessage name="phone" class="err" />
@@ -71,7 +71,7 @@
         </Form>
       </section>
 
-      <aside class="summary">
+      <aside class="summary" style="color: black;">
         <h3>訂單摘要</h3>
         <ul>
           <li>
@@ -194,73 +194,127 @@ function onSubmit(values) {
 .checkout-page {
   padding: 24px;
 }
+
+/* --- Layout --- */
 .layout {
   display: grid;
   gap: 24px;
   grid-template-columns: 1fr;
 }
-.form-area {
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 12px;
-  padding: 16px;
-}
+
+.form-area,
 .summary {
   background: #fff;
   border: 1px solid #eee;
   border-radius: 12px;
-  padding: 16px;
+  padding: 20px;
 }
+
+/* --- Grid for fields --- */
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 18px; /* 更舒服的間距 */
 }
+
 .grid .col-2 {
-  grid-column: span 2;
+  grid-column: 1 / -1;
 }
+
+/* --- Label 統一垂直排列 --- */
+label {
+  color: #111;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+/* --- Input & Select UI --- */
 input,
 select {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
+  box-sizing: border-box;
+  padding: 12px 14px;
+
+  background: #2e2e2e;          /* 暗色輸入框 */
+  color: #f3f4f6;               /* 輸入後的文字變亮 */
+  border: 1px solid #4b5563;     /* 深灰邊框 */
   border-radius: 8px;
+
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
+
+/* Focus 狀態更容易辨識 */
+input:focus,
+select:focus {
+  border-color: #3b82f6; /* 藍色聚焦樣式 */
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+  outline: none;
+  background: #1f1f1f; /* 聚焦時稍微更深一點 */
+}
+
+/* --- Error message --- */
 .err {
   color: #dc2626;
-  font-size: 12px;
-  margin-top: 4px;
-  display: block;
+  font-size: 13px;
+  margin-top: -2px;
+  line-height: 1.3;
 }
+
+/* --- Submit Button --- */
 .primary {
-  margin-top: 12px;
-  padding: 10px 14px;
+  margin-top: 10px;
+  padding: 12px 16px;
   border: 0;
   border-radius: 8px;
   background: #111827;
   color: #fff;
+  font-size: 15px;
   cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
 }
+
+.primary:hover:not(:disabled) {
+  background: #1f2937;
+}
+
+.primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- Coupon --- */
 .coupon {
   margin-top: 8px;
 }
+
 .coupon input {
   width: 100%;
-  padding: 8px 10px;
+  padding: 10px 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
 }
+
 .coupon .hint {
   color: #6b7280;
   font-size: 12px;
+  margin-top: 4px;
 }
+
+/* --- Total --- */
 .total {
-  margin-top: 8px;
+  margin-top: 12px;
   font-size: 1.1rem;
 }
+
+/* --- RWD 保留 --- */
 @media (min-width: 900px) {
   .layout {
     grid-template-columns: 2fr 1fr;
   }
 }
+
 </style>

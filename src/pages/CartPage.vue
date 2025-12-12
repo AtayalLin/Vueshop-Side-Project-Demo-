@@ -144,20 +144,23 @@ const checkout = () => {
   margin-top: 1rem;
 }
 .actions {
-  display: grid;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .checkout-btn {
-  margin-top: 0;
+  display: block; /* 保證佔滿整行 */
   width: 100%;
+  margin: 0;
   padding: 0.75rem;
   background-color: #111827;
   color: white;
   border: none;
   border-radius: 8px;
   font-weight: bold;
-  cursor: pointer;
   text-align: center;
+  cursor: pointer;
+  text-decoration: none; /* 移除 router-link 超連結底線 */
 }
 .checkout-btn.alt {
   background: #0b5;

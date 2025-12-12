@@ -10,11 +10,11 @@
         <p>單價：{{ product.price }} 元</p>
       </div>
     </div>
-    <div class="item-right">
-      <div class="quantity-control">
-        <button @click="decrease">－</button>
+    <div class="item-right" style="color: black;">
+      <div class="quantity-control" >
+        <button @click="decrease" style="color: black;">－</button>
         <span>{{ quantity }}</span>
-        <button @click="increase">＋</button>
+        <button @click="increase" style="color: black;">＋</button>
       </div>
       <p>小計：{{ subtotal }} 元</p>
       <button class="delete-btn" @click="remove">移除</button>
