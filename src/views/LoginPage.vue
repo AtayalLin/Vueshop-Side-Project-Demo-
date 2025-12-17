@@ -8,13 +8,39 @@
         v-model.trim="email"
         required
       />
-      <input
-        type="password"
-        placeholder="請輸入密碼"
-        v-model.trim="password"
-        minlength="6"
-        required
-      />
+      <!-- Password -->
+<div class="field has-addons">
+  <div class="control is-expanded">
+    <input
+      v-if="showPassword"
+      class="input"
+      type="text"
+      placeholder="請輸入密碼"
+      v-model.trim="password"
+      minlength="6"
+      required
+    />
+    <input
+      v-else
+      class="input"
+      type="password"
+      placeholder="請輸入密碼"
+      v-model.trim="password"
+      minlength="6"
+      required
+    />
+  </div>
+
+  <div class="control">
+    <button class="button is-white" type="button" @click="toggleShow">
+  <span class="icon is-small">
+    <i v-if="showPassword" class="fas fa-eye"></i>
+    <i v-else class="fas fa-eye-slash"></i>
+  </span>
+</button>
+  </div>
+</div>
+
       <button type="submit">登入</button>
     </form>
     <div v-if="errorMsg" class="error-msg">❌ {{ errorMsg }}</div>
@@ -37,6 +63,11 @@ const errorMsg = ref("");
 const auth = useAuthStore();
 const toast = useToast();
 const router = useRouter();
+const showPassword = ref(false); // 是否顯示密碼
+const toggleShow = () => {
+  showPassword.value = !showPassword.value;
+};
+
 
 const handleLogin = async () => {
   console.log("輸入的帳號密碼：", email.value, password.value);

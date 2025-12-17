@@ -4,6 +4,8 @@
     <main class="page-container">
       <router-view />
     </main>
+    <FooterSocial />   <!-- 全局 Footer -->
+
   </div>
 </template>
 
@@ -11,6 +13,8 @@
 import Navbar from "./components/Navbar.vue";
 import { onMounted } from "vue";
 import { useAuthStore } from "@/stores/authStore";
+import FooterSocial from "@/components/FooterSocial.vue";
+
 
 const auth = useAuthStore();
 
@@ -31,16 +35,8 @@ onMounted(() => {
 }
 
 .page-container {
-  /* flex: 1; */
-  /* 更寬但仍保有安全邊界：1760px 上限，視窗 98vw 內縮 */
-  /* max-width: clamp(1760px, 98vw, 1760px); */
-  /* padding-inline: clamp(8px, 1.5vw, 20px); */
-  /* padding-block: 32px; */
-  /* margin-inline: auto; */
-  /* width: 100%;  */
+  flex: 1;
 
-  /* 中央內容最大寬度（不含左右留白） */
-  /* max-width: 1760px; */
   width: min(95vw, 100%);
 
   /* 左右留白：固定 24px～48px 之間彈性 */
@@ -51,6 +47,8 @@ onMounted(() => {
 
   /* 水平置中 */
   margin-inline: auto;
+  padding-bottom: 80px;  /* 根據 Footer 高度調整 */
+
 }
 
 body {
@@ -59,4 +57,12 @@ body {
   padding: 0;
   background-color: var(--bg-color);
 }
+
+.app-shell {
+ display: flex;
+  flex-direction: column;
+  min-height: 100vh;  /* 讓整個頁面至少撐滿視窗高度 */
+  background-color: var(--bg-color);
+}
+
 </style>
