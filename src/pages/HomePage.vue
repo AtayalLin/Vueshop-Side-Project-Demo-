@@ -3,7 +3,7 @@
     <!-- Hero Section -->
     <HeroSection name="dotonbori">
       <template #title>
-        <h1 data-aos="fade-up" data-aos-delay="80">夜色道頓堀 · 和風選物</h1>
+        <h1 data-aos="fade-up" data-aos-delay="80" style="color: white;">夜色道頓堀 · 和風選物</h1>
       </template>
       <template #subtitle>
         <p data-aos="fade-up" data-aos-delay="160" style="color: white;">
